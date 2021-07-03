@@ -5,42 +5,32 @@ import { login } from "../../services/auth";
 const SearchForm = () => {
   const [search, setSearch] = useState("");
 
-  const onSubmit((e) => {
-      
-  })
+  const onSubmit= (e) => {
+    dispatch(getSearchResults)
+  };
 
   const updateSearch = (e) => {
     setSearch(e.target.value);
   };
 
   return (
-    <form onSubmit={onLogin}>
+    <form onSubmit={onSubmit}>
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
       <div>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="Search Terms">Email</label>
         <input
           name="email"
           type="text"
           placeholder="Email"
-          value={email}
-          onChange={updateEmail}
+          value={search}
+          onChange={setSearch}
         />
       </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type="submit">Login</button>
-      </div>
+        <button type="submit">Submit</button>
     </form>
   );
 };

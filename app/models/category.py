@@ -10,8 +10,8 @@ class BusinessCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(255), nullable=False)
 
-    businesses = db.relationship('Business', backref='business_categories')
-    
+    businesses = db.relationship('Business', cascade='all,delete', backref='business_categories')
+
     def to_dict(self):
         return {
             "id": self.id,

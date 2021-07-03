@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
-    reviews = db.relationship('Review', backref='users')
+    reviews = db.relationship('Review', cascade='all,delete', backref='users')
 
     @property
     def password(self):

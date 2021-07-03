@@ -7,7 +7,7 @@ from sqlalchemy_utils import PhoneNumber
 
 class Service(db.Model):
     __tablename__ = 'services'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     desc = db.Column(db.String(255), nullable=False)
     created_at = db.Column(
@@ -15,7 +15,7 @@ class Service(db.Model):
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
-    businesses = db.relationship('BusinessService', backref='services')
+    businesses = db.relationship('BusinessService', cascade='all,delete', backref='services')
 
     def to_dict(self):
         return {

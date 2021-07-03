@@ -11,8 +11,8 @@ class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     business_name = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=False)
-    latitude = db.Column(db.Float(precision=53), nullable=False)
-    longitude = db.Column(db.Float(precision=53), nullable=False)
+    # latitude = db.Column(db.Float(precision=53), nullable=False)
+    # longitude = db.Column(db.Float(precision=53), nullable=False)
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(255), nullable=False)
     zipcode = db.Column(db.Integer, nullable=False)
@@ -25,16 +25,16 @@ class Business(db.Model):
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
-    reviews = db.relationship('Review', backref="businesses")
-    service_ids = db.relationship('BusinessService', backref="businesses")
+    reviews = db.relationship('Review', cascade='all,delete', backref="businesses")
+    service_ids = db.relationship('BusinessService', cascade='all,delete', backref="businesses")
 
     def to_dict(self):
         return {
             "id": self.id,
             "business_name": self.business_name,
             "address": self.address,
-            "latitude": self.latitude,
-            "longitude": self.longitude,
+            # "latitude": self.latitude,
+            # "longitude": self.longitude,
             "city": self.city,
             "state": self.state,
             "zipcode": self.zipcode,
