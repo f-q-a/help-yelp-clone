@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import db, BusinessCategory
 
-business_category_routes = Blueprint('businesses', __name__)
+business_category_routes = Blueprint('business_categories', __name__)
 
 
 @business_category_routes.route('/')

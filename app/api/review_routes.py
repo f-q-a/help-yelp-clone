@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import
 from app.models import db, Review
 
 review_routes = Blueprint('reviews', __name__)
@@ -13,7 +12,7 @@ def reviews():
 
 
 @review_routes.route('/', methods=['POST'])
-def reviews():
+def add_review():
     res = request.get_json()
     review = Review(user_id=res.user_id,
                     business_id=res.business_id,
@@ -23,7 +22,7 @@ def reviews():
                     updated_at=res.updated_at)
     db.session.add(review)
     db.session.commit()
-    return [review.to_dict() for review in reviews]
+    return review.to_dict()
 
 
 @review_routes.route('/<int:id>')

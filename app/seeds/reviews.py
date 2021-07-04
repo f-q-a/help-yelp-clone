@@ -9,17 +9,17 @@ faker = Faker()
 def seed_reviews():
 
     reviews = [
-        Review(user_id=1, business_id=2, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=5),
-        Review(user_id=1, business_id=3, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=4),
-        Review(user_id=2, business_id=1, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=1),
-        Review(user_id=2, business_id=4, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=2),
-        Review(user_id=2, business_id=5, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=3),
-        Review(user_id=3, business_id=2, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=5),
-        Review(user_id=3, business_id=1, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=2),
-        Review(user_id=3, business_id=3, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=4),
-        Review(user_id=4, business_id=2, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=2),
-        Review(user_id=4, business_id=5, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=3),
-        Review(user_id=5, business_id=5, body=faker.paragraph(nb_sentences=5, variable_nb_sentences=False), rating=3)
+        Review(user_id=1, business_id=2, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=5),
+        Review(user_id=1, business_id=3, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=4),
+        Review(user_id=2, business_id=1, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=1),
+        Review(user_id=2, business_id=4, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=2),
+        Review(user_id=2, business_id=5, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=3),
+        Review(user_id=3, business_id=2, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=5),
+        Review(user_id=3, business_id=1, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=2),
+        Review(user_id=3, business_id=3, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=4),
+        Review(user_id=4, business_id=2, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=2),
+        Review(user_id=4, business_id=5, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=3),
+        Review(user_id=5, business_id=5, body=faker.paragraph(nb_sentences=3, variable_nb_sentences=False), rating=3)
     ]
 
     for review in reviews:

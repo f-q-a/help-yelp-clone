@@ -18,7 +18,7 @@ class Business(db.Model):
     zipcode = db.Column(db.Integer, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey(
         'business_categories.id'), nullable=False)
-    phone_number = composite(db.Unicode(20), nullable=False)
+    phone_number = db.Column(db.String, nullable=False)
     business_img = db.Column(db.String(255), nullable=False)
     created_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)

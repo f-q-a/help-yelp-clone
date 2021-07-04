@@ -9,16 +9,16 @@ faker = Faker()
 def seed_businesses():
 
     businesses = [
-        Business(business_name='Boston Cleaning Company', address='245 First St', city='Cambridge', state='MA ',
-                 zipcode='02142', category_id=1, business_img=''),
+        Business(business_name='Boston Cleaning Company', address='245 First St', city='Cambridge', state='MA',
+                 zipcode='02142', category_id=1, phone_number='(508) 620-2887', business_img=''),
         Business(business_name='Cleanzen Cleaning Services', address='30 Newbury St', city='Boston', state='MA',
-                 zipcode='02116', category_id=1, business_img=''),
-        Business(business_name='Boston Cleaning Company', address='245 First St', city='Cambridge', state='MA ',
-                 zipcode='02142', category_id=1, business_img=''),
-        Business(business_name='Cleanzen Cleaning Services', address='30 Newbury St', city='Boston', state='MA',
-                 zipcode='02116', category_id=1, business_img=''),
+                 zipcode='02116', category_id=1, phone_number='(508) 620-2887', business_img=''),
         Business(business_name='Speedy\'s Cleaning Services', address='396 Washington St Suite 258', city='Wellesley Hills', state='MA',
-                 zipcode='02481', category_id=1, business_img='')
+                 zipcode='02481', category_id=1, phone_number='(508) 620-2887', business_img=''),
+        Business(business_name='IL Cleaning services', address='178 Irving St #1', city='Framingham', state='MA',
+                 zipcode='01702', category_id=1, phone_number='(704) 777-1254', business_img=''),
+        Business(business_name='Let\'s Go Clean',address='178 Arlington St #2F', city='Framingham', state='MA',
+                 zipcode='01702', category_id=1, phone_number='(508) 250-4005', business_img='')
     ]
 
     for business in businesses:
