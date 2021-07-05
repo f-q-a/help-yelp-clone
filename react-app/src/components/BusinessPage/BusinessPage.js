@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import React, { useState, useEffect } from "react";
 import * as businessActions from '../../store/business'
+import * as reviewActions from '../../store/review'
 import { useDispatch, useSelector } from "react-redux";
 import Review from './Review'
 import { Link, useHistory } from 'react-router-dom'
@@ -15,23 +16,24 @@ function BusinessPage() {
     const reviews = {...business[businessId]}
     const userReviews = {...reviews.reviews}
 
-    userReviews.forEach((el)=>{
-        if(el['user_id'] === sessionUser.id){
-            setLoadAdd(true);
-        }
-    })
+    // userReviews.forEach((el)=>{
+    //     if(el['user_id'] === sessionUser.id){
+    //         setLoadAdd(true);
+    //     }
+    // })
 
     console.log(userReviews);
   useEffect(() => {
     async function fetchData() {
       await dispatch(businessActions.getBusiness(businessId))
+      await dispatch(reviewActions.getReviews(businessId))
       const response = await fetch("/api/users/");
       const responseData = await response.json();
       setUsers(responseData.users);
       setLoading(true)
     }
     fetchData();
-  }, [businessId,business,dispatch]);
+  }, [businessId,business, dispatch]);
 
     if(!loading){
         return (<div>

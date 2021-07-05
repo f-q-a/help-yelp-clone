@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Review
+from sqlalchemy import and_
+
 
 review_routes = Blueprint('review', __name__)
 
@@ -34,7 +36,10 @@ def review(id):
 @review_routes.route('/<int:b_id>/<int:u_id>/edit', methods=['POST'])
 def edit_review(b_id,u_id):
     res = request.get_json()
-    review = Review.query.filter_by(business_id=b_id, user_id=u_id).first()
+    print('Testing')
+    print(b_id, u_id)
+    review = Review.query.filter(and_(Review.business_id == int(b_id), Review.user_id == int(u_id))).first()
+    print(review)
     review.body = res['body']
     review.updated_at = db.func.now()
     db.session.add(review)

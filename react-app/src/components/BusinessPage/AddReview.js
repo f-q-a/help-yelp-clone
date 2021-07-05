@@ -17,12 +17,12 @@ function AddReview() {
 
     const reviews = business[businessId]['reviews']
 
-    reviews.forEach(el => {
+    // reviews.forEach(el => {
 
-        if (el['user_id'] === Number(userId)){
-            currReview = {...el};
-        }
-    })
+    //     if (el['user_id'] === Number(userId)){
+    //         currReview = {...el};
+    //     }
+    // })
 
     const [loading, setLoading] = useState(false);
     const [newBody, setNewBody] = useState('')
