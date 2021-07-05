@@ -12,6 +12,7 @@ function EditReview(props) {
     const {businessId, userId} = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
+
     const business = useSelector(state => state.business.businesses)
     let currReview = '';
 
@@ -24,8 +25,9 @@ function EditReview(props) {
         }
     })
 
+    const [newRating, setNewRating] = useState(Number(currReview.rating));
     const [loading, setLoading] = useState(false);
-    const [newBody, setNewBody] = useState('')
+    const [newBody, setNewBody] = useState(String(currReview.body))
 
 
     useEffect(() => {
@@ -45,7 +47,7 @@ function EditReview(props) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(reviewActions.editReview(businessId, userId, newBody))
+        dispatch(reviewActions.editReview(businessId, userId, newBody, newRating))
         history.push(`/business/${businessId}`)
 
     }
@@ -59,12 +61,26 @@ function EditReview(props) {
         return (
             <form onSubmit={handleSubmit}>
             <div>
-                <label>Update Review</label>
+                <label>
+                    Rating
+                    <select value={newRating} onChange={e => setNewRating(e.target.value)}>
+                       <option value={1}>1</option>
+                       <option value={2}>2</option>
+                       <option value={3}>3</option>
+                       <option value={4}>4</option>
+                       <option value={5}>5</option>
+                    </select>
+                </label>
+
+                <label>
+                    Update Review
                     <textarea
-                        defaultValue={currReview.body}
+                        defaultValue={newBody}
                         onChange={(e) => setNewBody(e.target.value)}
                         required
                     />
+                </label>
+
             </div>
             <button type="submit">Submit Changes</button>
             <button onClick={handleDelete}>Delete Review</button>

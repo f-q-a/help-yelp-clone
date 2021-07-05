@@ -7,6 +7,7 @@ import StarIcon from '@material-ui/icons/Star';
 
 function Review(props) {
   console.log(props.users)
+  const reviews = useSelector(state => state.session.reviews);
   const sessionUser = useSelector(state => state.session.user);
   useEffect(() => {
     async function fetchData() {

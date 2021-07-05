@@ -41,7 +41,8 @@ def edit_review(b_id,u_id):
     print(b_id, u_id)
     review = Review.query.filter(and_(Review.business_id == int(b_id), Review.user_id == int(u_id))).first()
     print(review)
-    review.body = res
+    review.body = res['review']
+    review.rating = res['newRating']
     review.updated_at = db.func.now()
     db.session.add(review)
     db.session.commit()
