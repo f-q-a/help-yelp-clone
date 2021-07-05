@@ -27,10 +27,11 @@ def add_review():
     return review.to_dict()
 
 
-@review_routes.route('/<int:id>')
-def review(id):
-    review = Review.query.get(id)
-    return review.to_dict()
+@review_routes.route('/<int:b_id>')
+def review(b_id):
+    reviews = Review.query.filter(Review.business_id == int(b_id)).all()
+    print(reviews)
+    return jsonify([review.to_dict() for review in reviews])
 
 
 @review_routes.route('/<int:b_id>/<int:u_id>/edit', methods=['POST'])
@@ -40,7 +41,7 @@ def edit_review(b_id,u_id):
     print(b_id, u_id)
     review = Review.query.filter(and_(Review.business_id == int(b_id), Review.user_id == int(u_id))).first()
     print(review)
-    review.body = res['body']
+    review.body = res
     review.updated_at = db.func.now()
     db.session.add(review)
     db.session.commit()

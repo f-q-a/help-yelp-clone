@@ -2,10 +2,11 @@
 // import * as ChannelActions from './channel'
 const DELETE_REVIEW = "review/DELETE_REVIEW"
 const EDIT_REVIEW = "review/EDIT_REVIEW"
+const GET_REVIEWS = "review/GET_REVIEWS"
 
-const getReviewAction = (review) => ({
-    type: EDIT_REVIEW,
-    review
+const getReviewsAction = (reviews) => ({
+    type: GET_REVIEWS,
+    reviews
 })
 
 const editReviewAction = (review) => ({
@@ -24,7 +25,7 @@ export const getReviews = (businessId) => async (dispatch) => {
     if (data.errors){
         return data
     } else {
-        dispatch(editReviewAction(data))
+        dispatch(getReviewsAction(data))
         return data
     }
 }
@@ -66,14 +67,22 @@ export const deleteReview = (businessId, userId, review) => async (dispatch) => 
     }
 }
 
-const initialState = {reviews: []}
+const initialState = {}
 export default function reducer(state = initialState, action) {
     let newState;
     switch (action.type) {
+        case GET_REVIEWS:
+            newState = {...state};
+            const reviews = {}
+            action.reviews.forEach((el, idx) => {
+                reviews[idx] = {...el}
+            })
+            newState.reviews = {...reviews}
+            return {...state, reviews: {...newState.reviews}}
         case EDIT_REVIEW:
             newState = {...state};
-            newState.reviews.push(action.review);
-            return {...state, reviews: [...newState.reviews]}
+            newState.reviews[action.review.business_id] = action.review;
+            return {...state, reviews: {...newState.reviews}}
         case DELETE_REVIEW:
             newState = {...state};
             delete newState.reviews[action.review.id];
