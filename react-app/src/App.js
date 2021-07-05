@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Splash from './components/Splash/Splash'
+import BusinessPage from "./components/BusinessPage/BusinessPage";
 import { authenticate } from "./store/session";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
       await dispatch(authenticate());
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/business/:businessId' exact={true}>
+          <BusinessPage/>
         </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList/>

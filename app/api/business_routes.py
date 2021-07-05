@@ -14,4 +14,7 @@ def businesses():
 @business_routes.route('/<int:id>')
 def business(id):
     business = Business.query.get(id)
-    return business.to_dict()
+    business_alt = business.to_dict()
+    business_alt['reviews'] = [review.to_dict() for review in business.reviews]
+    print(business_alt)
+    return business_alt
