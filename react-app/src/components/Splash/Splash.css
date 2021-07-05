@@ -8,9 +8,6 @@
       ". main ."
       "footer footer footer";
   }
-.navbar { grid-area: navbar; }
-.main { grid-area: main; }
-.footer { grid-area: footer; }
-.navbar.ul {
-        list-style-type: none;
-    }
+  .navbar { grid-area: navbar; }
+  .main { grid-area: main; }
+  .footer { grid-area: footer; }

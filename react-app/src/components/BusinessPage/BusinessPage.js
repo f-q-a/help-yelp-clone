@@ -3,13 +3,25 @@ import React, { useState, useEffect } from "react";
 import * as businessActions from '../../store/business'
 import { useDispatch, useSelector } from "react-redux";
 import Review from './Review'
-
+import { Link, useHistory } from 'react-router-dom'
 function BusinessPage() {
     const {businessId} = useParams();
     const dispatch = useDispatch();
     const business = useSelector(state => state.business.businesses)
     const [users, setUsers] = useState([]);
+    const sessionUser = useSelector(state => state.session.user);
     const [loading, setLoading] = useState(false);
+    const [loadAdd, setLoadAdd] = useState(false);
+    const reviews = {...business[businessId]}
+    const userReviews = {...reviews.reviews}
+
+    userReviews.forEach((el)=>{
+        if(el['user_id'] === sessionUser.id){
+            setLoadAdd(true);
+        }
+    })
+
+    console.log(userReviews);
   useEffect(() => {
     async function fetchData() {
       await dispatch(businessActions.getBusiness(businessId))
@@ -19,7 +31,7 @@ function BusinessPage() {
       setLoading(true)
     }
     fetchData();
-  }, [businessId, business, dispatch]);
+  }, [businessId,business,dispatch]);
 
     if(!loading){
         return (<div>
@@ -41,6 +53,10 @@ function BusinessPage() {
 
                         })}
                     </div>
+                    <div>
+                        <Link to={`/business/${businessId}/new-review`}>Add New Review</Link>{' '}
+                    </div>
+
                 </div>):(<div>
                     Loading...
                 </div>)}

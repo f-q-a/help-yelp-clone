@@ -9,6 +9,8 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Splash from './components/Splash/Splash'
 import BusinessPage from "./components/BusinessPage/BusinessPage";
+import EditReview from './components/BusinessPage/EditReview'
+import AddReview from './components/BusinessPage/AddReview'
 import { authenticate } from "./store/session";
 
 function App() {
@@ -40,6 +42,12 @@ function App() {
         <Route path='/business/:businessId' exact={true}>
           <BusinessPage/>
         </Route>
+        <ProtectedRoute path='/business/:businessId/new-review' exact={true}>
+          <AddReview/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/business/:businessId/reviews/:userId/edit' exact={true}>
+          <EditReview/>
+        </ProtectedRoute>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList/>
         </ProtectedRoute>

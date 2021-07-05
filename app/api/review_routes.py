@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Review
 
-review_routes = Blueprint('reviews', __name__)
+review_routes = Blueprint('review', __name__)
 
 
 @review_routes.route('/')
@@ -31,10 +31,10 @@ def review(id):
     return review.to_dict()
 
 
-@review_routes.route('/<int:id>/edit', methods=['POST'])
-def edit_review(id):
+@review_routes.route('/<int:b_id>/<int:u_id>/edit', methods=['POST'])
+def edit_review(b_id,u_id):
     res = request.get_json()
-    review = Review.query.get(id)
+    review = Review.query.filter_by(business_id=b_id, user_id=u_id).first()
     review.body = res['body']
     review.updated_at = db.func.now()
     db.session.add(review)
@@ -42,9 +42,9 @@ def edit_review(id):
     return review.to_dict()
 
 
-@review_routes.route('/<int:id>', methods=['DELETE'])
-def delete_review(id):
-    review = db.session.query(Review).get(id)
+@review_routes.route('/<int:b_id>/<int:u_id>/delete', methods=['DELETE'])
+def delete_review(b_id, u_id):
+    review = Review.query.filter_by(business_id=b_id, user_id=u_id).first()
     temp = review.to_dict()
     db.session.delete(review)
     db.session.commit()

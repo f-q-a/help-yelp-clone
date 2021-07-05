@@ -1,6 +1,6 @@
 // constants
-const GET_USERS = "session/SET_USER"
-const REMOVE_USER = "session/REMOVE_USER"
+const GET_USERS = "user/SET_USER"
+const REMOVE_USER = "user/REMOVE_USER"
 
 // action creators
 const setUser = (user) => ({
