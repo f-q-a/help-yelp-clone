@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
 from sqlalchemy_utils import PhoneNumber
-
+from flask import jsonify
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -26,5 +26,6 @@ class Review(db.Model):
             "body": self.body,
             "rating": self.rating,
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
+            "user": self.user.to_dict()
         }

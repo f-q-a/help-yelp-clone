@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
-    reviews = db.relationship('Review', cascade='all,delete', backref='users')
+    reviews = db.relationship('Review', cascade='all,delete', backref='user')
 
     @property
     def password(self):
@@ -35,7 +35,6 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "hashed_password": self.hashed_password,
             "profile_img": self.profile_img,
             "created_at": self.created_at,
             "updated_at": self.updated_at
