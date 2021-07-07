@@ -39,6 +39,7 @@ function BusinessPage() {
         async function fetchData() {
             await dispatch(businessActions.getBusiness(businessId))
             await dispatch(reviewActions.getReviews(businessId))
+            
         }
 
         fetchData();

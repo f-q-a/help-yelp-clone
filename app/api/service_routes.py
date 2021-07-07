@@ -8,7 +8,8 @@ service_routes = Blueprint('services', __name__)
 @service_routes.route('/')
 def services():
     services = Service.query.all()
-    return [service.to_dict() for service in services]
+    service_list = [service.to_dict() for service in services]
+    return jsonify(service_list)
 
 
 @service_routes.route('/<int:id>')
