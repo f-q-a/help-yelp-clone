@@ -7,29 +7,35 @@ from sqlalchemy import and_
 review_routes = Blueprint('review', __name__)
 
 
-@review_routes.route('/')
-def reviews():
-    reviews = Review.query.all()
-    return [review.to_dict() for review in reviews]
+# @review_routes.route('/')
+# def reviews():
+#     reviews = Review.query.all()
+#     print('Are we even making it here', type(reviews))
+#     for review in reviews:
+#         print('LOOK OVER HERE AS WELL', review.users)
+#     reviews_alt = jsonify([review.to_dict() for review in reviews])
+#     # jsonify({review.to_dict})
+#     return reviews_alt
 
 
-@review_routes.route('/', methods=['POST'])
-def add_review():
+
+@review_routes.route('/<int:b_id>')
+def review(b_id):
+    reviews = Review.query.filter(Review.business_id == int(b_id)).all()
+    print(reviews)  # TODO: I don't know man
+    return jsonify([review.to_dict() for review in reviews])
+
+@review_routes.route('/<int:b_id>/<int:u_id>/add', methods=['POST'])
+def add_review(b_id,u_id):
     res = request.get_json()
-    review = Review(user_id=res.user_id,
-                    business_id=res.business_id,
-                    body=res.body,
-                    rating=res.rating,
-                    created_at=res.created_at,
-                    updated_at=res.updated_at)
+    print(b_id, u_id)
+    review = Review(business_id=b_id,
+                    user_id=u_id,
+                    body = res['body'],
+                    rating=res['rating'])
+    print(review)
     db.session.add(review)
     db.session.commit()
-    return review.to_dict()
-
-
-@review_routes.route('/<int:id>')
-def review(id):
-    review = Review.query.get(id)
     return review.to_dict()
 
 
@@ -40,7 +46,8 @@ def edit_review(b_id,u_id):
     print(b_id, u_id)
     review = Review.query.filter(and_(Review.business_id == int(b_id), Review.user_id == int(u_id))).first()
     print(review)
-    review.body = res['body']
+    review.body = res['review']
+    review.rating = res['newRating']
     review.updated_at = db.func.now()
     db.session.add(review)
     db.session.commit()

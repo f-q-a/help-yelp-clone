@@ -6,66 +6,71 @@ import { useDispatch, useSelector } from "react-redux";
 import Review from './Review'
 import { Link, useHistory } from 'react-router-dom'
 function BusinessPage() {
-    const {businessId} = useParams();
+    const { businessId, userId } = useParams();
     const dispatch = useDispatch();
-    const business = useSelector(state => state.business.businesses)
+    const business = useSelector(state => {
+        console.log(state);
+        console.log(businessId);
+        console.log(state['business']);
+        return state.business
+    })
+    const to_str = String(businessId)
+    const reviews = useSelector(state => state.review)
     const [users, setUsers] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
-    const [loading, setLoading] = useState(false);
-    const [loadAdd, setLoadAdd] = useState(false);
-    const reviews = {...business[businessId]}
-    const userReviews = {...reviews.reviews}
+    const [blockAdd, setBlockAdd] = useState(false);
 
-    // userReviews.forEach((el)=>{
-    //     if(el['user_id'] === sessionUser.id){
-    //         setLoadAdd(true);
-    //     }
-    // })
-
-    console.log(userReviews);
-  useEffect(() => {
-    async function fetchData() {
-      await dispatch(businessActions.getBusiness(businessId))
-      await dispatch(reviewActions.getReviews(businessId))
-      const response = await fetch("/api/users/");
-      const responseData = await response.json();
-      setUsers(responseData.users);
-      setLoading(true)
+    const conditionalRenderForReview = () => {
+        console.log('IS session user home?', sessionUser)
+        console.log('Is business home?', business[businessId])
+        if (sessionUser) {
+            for (const el in reviews) {
+                console.log('Are we keying into reviews correctly?', el)
+                if (Number(reviews[el]['user_id']) === Number(sessionUser.id)) {
+                    console.log('here we are', el['user_id'])
+                    setBlockAdd(true);
+                    break;
+                }
+            }
+        }
     }
-    fetchData();
-  }, [businessId,business, dispatch]);
 
-    if(!loading){
-        return (<div>
-            Loading...
-        </div>)
-    }else {
+    useEffect(() => {
+        async function fetchData() {
+            await dispatch(businessActions.getBusiness(businessId))
+            await dispatch(reviewActions.getReviews(businessId))
+        }
+
+        fetchData();
+
+    }, [businessId, dispatch]);
+    conditionalRenderForReview();
+
+
+
         return (
             <div>
-                {business? (
-                <div>
-                    {business[businessId].business_name}
+                {business.businesses[to_str] ? (
                     <div>
-                       {business[businessId].address}, {business[businessId].city}, {business[businessId].state}, {business[businessId].zipcode}
-                    </div>
-                    <div>Reviews</div>
-                    <div>
-                        {business[businessId]['reviews'].map((review, index) =>{
-                            return(<Review key={index} review={review} users={users} />);
+                        {business.businesses[to_str].business_name}
+                        <div>
+                            {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
+                        </div>
+                        <div>Reviews</div>
+                        <div>
+                            {Object.values(business.businesses[to_str].reviews).map((review, index) => {
+                                return (<Review key={index} review={review} />);
+                            })}
+                        </div>
 
-                        })}
-                    </div>
-                    <div>
-                        <Link to={`/business/${businessId}/new-review`}>Add New Review</Link>{' '}
-                    </div>
+                        {blockAdd === true ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/new-review`}>Add New Review</Link>{' '}</div>)}
 
-                </div>):(<div>
-                    Loading...
-                </div>)}
+
+
+                    </div>) : (<div>
+                        Loading...
+                    </div>)}
             </div>
         );
-
-    }
-
 }
 export default BusinessPage;

@@ -8,6 +8,9 @@ user_routes = Blueprint('users', __name__)
 @user_routes.route('/')
 def users():
     users = User.query.all()
+    for user in users:
+        print('HEY LOOK OVER HERE', user.reviews)
+
     return {"users": [user.to_dict() for user in users]}
 
 

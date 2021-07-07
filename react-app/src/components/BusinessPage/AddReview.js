@@ -9,70 +9,48 @@ import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
 
 function AddReview() {
+    const dispatch = useDispatch();
     const {businessId, userId} = useParams();
     const history = useHistory();
-    const dispatch = useDispatch();
-    const business = useSelector(state => state.business.businesses)
-    let currReview = '';
-
-    const reviews = business[businessId]['reviews']
-
-    // reviews.forEach(el => {
-
-    //     if (el['user_id'] === Number(userId)){
-    //         currReview = {...el};
-    //     }
-    // })
-
-    const [loading, setLoading] = useState(false);
-    const [newBody, setNewBody] = useState('')
-
-
-    useEffect(() => {
-        async function fetchData() {
-            await dispatch(businessActions.getBusiness(businessId))
-            setLoading(true)
-        }
-        fetchData();
-    }, [businessId, business, dispatch]);
+    const [body, setBody] = useState("");
     const sessionUser = useSelector(state => state.session.user);
-    const handleDelete = (e) => {
-        e.preventDefault();
-        currReview.body = newBody;
-        dispatch(reviewActions.deleteReview(businessId, userId, currReview))
-        history.push(`/business/${businessId}`)
+    const [rating, setRating] = useState(0);
 
-    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(reviewActions.editReview(businessId, userId))
+        dispatch(reviewActions.addReview(businessId, Number(userId), body, rating))
         history.push(`/business/${businessId}`)
 
     }
-    if(!business){
-        return (
-            <div>
-                Loading...
-            </div>
-        );
-    }else{
+
         return (
             <form onSubmit={handleSubmit}>
             <div>
-                <label>Update Review</label>
+                <label>
+                    Rating
+                    <select onChange={e => setRating(e.target.value)}>
+                       <option value={1}>1</option>
+                       <option value={2}>2</option>
+                       <option value={3}>3</option>
+                       <option value={4}>4</option>
+                       <option value={5}>5</option>
+                    </select>
+                </label>
+
+                <label>
+                    Create Review
                     <textarea
-                        defaultValue={currReview.body}
-                        onChange={(e) => setNewBody(e.target.value)}
+                        defaultValue={body}
+                        onChange={(e) => setBody(e.target.value)}
                         required
                     />
+                </label>
+
             </div>
-            <button type="submit">Submit Changes</button>
-            <button onClick={handleDelete}>Delete Review</button>
+            <button type="submit">Submit Review</button>
         </form>
 
         );
-    }
-
 }
 
 export default AddReview
