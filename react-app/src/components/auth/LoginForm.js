@@ -31,24 +31,24 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form onSubmit={onLogin} className='mt-2 flex flex-col justify-center'>
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
+      <div className='mt-2 flex flex-col justify-center'>
+        <label htmlFor="email" className='mr-2 ml-2'>Email</label>
         <input
-          name="email"
+          name="email"bn      
           type="text"
           placeholder="Email"
           value={email}
           onChange={updateEmail}
         />
       </div>
-      <div>
-        <label htmlFor="password">Password</label>
+      <div className='mt-2 flex flex-col justify-center'>
+        <label htmlFor="password" className='mr-2 ml-2'>Password</label>
         <input
           name="password"
           type="password"
@@ -56,8 +56,8 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type="submit">Login</button>
       </div>
+      <button type="submit" className='ml-2 mt-1'>Login</button>
     </form>
   );
 };
