@@ -24,8 +24,9 @@ function BusinessPage() {
         console.log('IS session user home?', sessionUser)
         console.log('Is business home?', business[businessId])
         if (sessionUser) {
-            for (const el in reviews) {
+            for (const el in reviews[businessId]) {
                 console.log('Are we keying into reviews correctly?', el)
+                console.log(reviews)
                 if (Number(reviews[el]['user_id']) === Number(sessionUser.id)) {
                     console.log('here we are', el['user_id'])
                     setBlockAdd(true);
@@ -38,8 +39,9 @@ function BusinessPage() {
     useEffect(() => {
         async function fetchData() {
             await dispatch(businessActions.getBusiness(businessId))
-            await dispatch(reviewActions.getReviews(businessId))
-            
+            const checkReviews = await dispatch(reviewActions.getReviews(businessId))
+            checkReviews.forEach(el => el.user_id === sessionUser.id ? setBlockAdd(true) : setBlockAdd(false))
+
         }
 
         fetchData();
@@ -60,6 +62,7 @@ function BusinessPage() {
                         <div>Reviews</div>
                         <div>
                             {Object.values(business.businesses[to_str].reviews).map((review, index) => {
+                                console.log(review)
                                 return (<Review key={index} review={review} />);
                             })}
                         </div>

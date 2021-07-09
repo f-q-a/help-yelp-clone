@@ -1,30 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getBusinesses } from '../../store/business'
+import { getBusinesses } from '../../store/business';
+import { Link } from 'react-router-dom';
 function SearchResults(props) {
     const { business } = props
-    const [search, setSearch] = useState('');
-    const [filter, setFilter] = useState('');
+    console.log(business)
 
     return (
 
         <div>
-            <div>
-            <label htmlFor="search">Search</label>
-            <input
-              name="search"
-              type="text"
-              placeholder="search"
-              value={search}
-              onChange={setSearch}
-            />
-            </div>
-            <div>
-                <div> {business.business_name} </div>
-                <div> {business.address},  {business.city}, {business.state}, {business.zipcode} </div>
-                <div> {business.phone_number} </div>
-            </div>
+            <Link to={`/business/${Number(business.id)}`}>{String(business['business_name'])}</Link>
+            <div> {business.address},  {business.city}, {business.state}, {business.zipcode} </div>
+            <div> {business.phone_number} </div>
         </div>
     );
 
