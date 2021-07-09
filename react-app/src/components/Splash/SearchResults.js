@@ -10,22 +10,10 @@ function SearchResults(props) {
     return (
 
         <div>
-            <div>
-            <label htmlFor="search">Search</label>
-            <input
-              name="search"
-              type="text"
-              placeholder="search"
-              value={search}
-              onChange={setSearch}
-            />
-            </div>
-            <div>
                 <div> {business.business_name} </div>
                 <div> {business.address},  {business.city}, {business.state}, {business.zipcode} </div>
                 <div> {business.phone_number} </div>
             </div>
-        </div>
     );
 
 }

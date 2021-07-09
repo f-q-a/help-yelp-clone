@@ -41,6 +41,11 @@ function Splash() {
     }
 
     )
+    temp = temp.filter((el, idx, self) =>
+      idx === self.findIndex((t) => (
+        t['id'] === el["id"] && t['business_name'] === el['business_name']
+      ))
+    )
     setSearchResults([...temp])
 
     const categoryFilter = () => {
@@ -64,6 +69,19 @@ function Splash() {
   {
     return businesses ? (
       <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="search">Search</label>
+            <input
+              name="search"
+              type="text"
+              placeholder="search"
+              value={search}
+              onChange={handleChange}
+            />
+            <button type='submit'>Submit</button>
+          </div>
+        </form>
         {searchResults.map((business, idx) => <div key={idx}> <SearchResults business={business} /> </div>)}
       </div>
     ) : (<div>Loading...</div>)
