@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getBusinesses } from '../../store/business'
 function SearchResults(props) {
     const { business } = props
+    const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
 
     return (
@@ -16,7 +17,7 @@ function SearchResults(props) {
               type="text"
               placeholder="search"
               value={search}
-              onChange={handleChange}
+              onChange={setSearch}
             />
             </div>
             <div>

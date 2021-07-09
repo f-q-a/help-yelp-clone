@@ -11,6 +11,7 @@ import Splash from './components/Splash/Splash'
 import BusinessPage from "./components/BusinessPage/BusinessPage";
 import EditReview from './components/BusinessPage/EditReview'
 import AddReview from './components/BusinessPage/AddReview'
+import SearchResults from './components/Splash/SearchResults'
 import { authenticate } from "./store/session";
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
         </Route>
         <Route path='/business/:businessId' exact={true}>
           <BusinessPage/>
+        </Route>
+        <Route path='/search/:searchTerm'>
+          <SearchResults />
         </Route>
         <ProtectedRoute path='/business/:businessId/:userId/new-review' exact={true}>
           <AddReview/>
