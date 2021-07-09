@@ -45,9 +45,9 @@ function EditReview(props) {
         history.push(`/business/${businessId}`)
 
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(reviewActions.editReview(businessId, userId, newBody, newRating))
+        await dispatch(reviewActions.editReview(businessId, userId, newBody, newRating))
         history.push(`/business/${businessId}`)
 
     }
