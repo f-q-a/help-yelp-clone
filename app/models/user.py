@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
     reviews = db.relationship('Review', cascade='all,delete', backref='user')
+    businesses = db.relationship('Business', cascade='all,delete', backref='user')
 
     @property
     def password(self):

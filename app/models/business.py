@@ -20,11 +20,12 @@ class Business(db.Model):
         'business_categories.id'), nullable=False)
     phone_number = db.Column(db.String, nullable=False)
     business_img = db.Column(db.String(255), nullable=False)
+    owner = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
-
+    owner = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     reviews = db.relationship('Review', cascade='all,delete', backref="business")
     business_services = db.relationship('BusinessService', cascade='all,delete', backref="business")
 
@@ -36,6 +37,7 @@ class Business(db.Model):
             # "latitude": self.latitude,
             # "longitude": self.longitude,
             "city": self.city,
+            'owner': self.owner,
             "state": self.state,
             "zipcode": self.zipcode,
             "category_id": self.category_id,
