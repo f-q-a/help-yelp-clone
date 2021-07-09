@@ -33,14 +33,11 @@ const LoginForm = () => {
   return (
     <form onSubmit={onLogin} className='mt-2 flex flex-col justify-center'>
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
       </div>
       <div className='mt-2 flex flex-col justify-center'>
         <label htmlFor="email" className='mr-2 ml-2'>Email</label>
         <input
-          name="email"bn      
+          name="email"bn
           type="text"
           placeholder="Email"
           value={email}

@@ -14,18 +14,28 @@ function Splash() {
     let temp = [];
     businesses.forEach(el => {
       let tempArr = [...Object.values(el)];
-
+      let serviceArr = [...Object.values(el['services'])]
+      let category = el['category'];
       tempArr = tempArr.filter(el => typeof (el) === "string");
 
       for (let i = 0; i < tempArr.length; i++) {
         console.log(tempArr[i])
+        console.log(tempArr)
+        console.log(category)
 
-        if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1) {
+        if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category['name'].toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
 
         }
 
 
+      }
+
+      for(let i = 0; i < el['services'].length; i++){
+        console.log(el['services'][i])
+        if(el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)){
+          temp.push({...el})
+        }
       }
 
     }
@@ -45,9 +55,8 @@ function Splash() {
     async function fetchData() {
       const response = await fetch("/api/business/");
       const responseData = await response.json();
-      const serviceRes = await fetch("/api/services/");
-      const serviceData = await serviceRes.json();
-      setBusinesses(responseData.businesses);
+      console.log(responseData)
+      setBusinesses(responseData);
     }
     fetchData();
   }, []);
@@ -55,19 +64,6 @@ function Splash() {
   {
     return businesses ? (
       <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="search">Search</label>
-            <input
-              name="search"
-              type="text"
-              placeholder="search"
-              value={search}
-              onChange={handleChange}
-            />
-            <button type='submit'>Submit</button>
-          </div>
-        </form>
         {searchResults.map((business, idx) => <div key={idx}> <SearchResults business={business} /> </div>)}
       </div>
     ) : (<div>Loading...</div>)

@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import DemoLogin from './auth/DemoLogin';
+
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user)
@@ -25,9 +27,19 @@ const NavBar = () => {
         </li>
 
 
-          {sessionUser ? <li><LogoutButton /> </li> : <NavLink className='col-start-5 col-end-6' to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink>}
+        {sessionUser ? (<li><LogoutButton /> </li>) :
+          (<>
+            <li>
+              <NavLink className='col-start-5 col-end-6' to="/login" exact={true} activeClassName="active">
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <DemoLogin />
+            </li>
+          </>
+          )
+        }
 
       </ul>
     </nav>
