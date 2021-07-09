@@ -10,20 +10,13 @@ import * as reviewActions from '../../store/review'
 
 function EditReview(props) {
     const {businessId, userId} = useParams();
+    console.log(businessId, userId);
     const history = useHistory();
     const dispatch = useDispatch();
 
     const business = useSelector(state => state.business.businesses)
-    let currReview = '';
-
-    const reviews = business[businessId]['reviews']
-
-    reviews.forEach(el => {
-
-        if (el['user_id'] === Number(userId)){
-            currReview = {...el};
-        }
-    })
+    let currReview = business[`${userId}-${businessId}`];
+    console.log(currReview)
 
     const [newRating, setNewRating] = useState(Number(currReview.rating));
     const [loading, setLoading] = useState(false);
