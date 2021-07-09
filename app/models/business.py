@@ -25,7 +25,8 @@ class Business(db.Model):
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
-
+    reviews = db.relationship('Review', cascade='all,delete', backref="business")
+    business_services = db.relationship('BusinessService', cascade='all,delete', backref="business")
 
     def to_dict(self):
         return {
@@ -40,8 +41,7 @@ class Business(db.Model):
             "category_id": self.category_id,
             "phone_number": self.phone_number,
             "business_img": self.business_img,
+            "services": {business_service.service.id: business_service.service.to_dict() for business_service in self.business_services},
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
-    reviews = db.relationship('Review', cascade='all,delete', backref="businesses")
-    service_ids = db.relationship('BusinessService', cascade='all,delete', backref="businesses")

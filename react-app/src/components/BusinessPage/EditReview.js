@@ -40,7 +40,6 @@ function EditReview(props) {
     const sessionUser = useSelector(state => state.session.user);
     const handleDelete = (e) => {
         e.preventDefault();
-        currReview.body = newBody;
         dispatch(reviewActions.deleteReview(businessId, userId, currReview))
         history.push(`/business/${businessId}`)
 

@@ -15,7 +15,7 @@ class Service(db.Model):
     updated_at = db.Column(
         db.DateTime, default=datetime.datetime.utcnow(), nullable=False)
 
-    businesses = db.relationship('BusinessService', cascade='all,delete', backref='services')
+    businesses = db.relationship('BusinessService', cascade='all,delete', backref='service')
 
     def to_dict(self):
         return {

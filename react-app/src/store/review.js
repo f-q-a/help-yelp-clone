@@ -10,10 +10,9 @@ const addReviewAction = (review) => ({
     review
 })
 
-const getReviewsAction = (reviews, businessId) => ({
+const getReviewsAction = (reviews) => ({
     type: GET_REVIEWS,
-    reviews,
-    businessId
+    reviews
 })
 
 const editReviewAction = (review) => ({
@@ -55,14 +54,13 @@ export const addReview = (businessId, userId, body, rating) => async (dispatch) 
 //     }
 // }
 
-export const getReviews = (businessId) => async (dispatch) => {
+export const getReviews = (businessId) => async (dispatch)  => {
     const response = await fetch(`/api/review/${businessId}`)
     const data = await response.json();
     if (data.errors){
         return data
     } else {
-        dispatch(getReviewsAction(data, businessId))
-        return data
+        dispatch(getReviewsAction(data))
     }
 }
 
@@ -115,24 +113,26 @@ export default function reducer(state = initialState, action) {
             const reviews = {}
             console.log(action.reviews)
 
-            action.reviews.forEach((el) => {
-                temp = Object.assign({}, el);
-                temp[temp.user_id] = Object.assign({}, temp)
-                reviews[action.businessId] = {...temp}
-                console.log(reviews)
-            })
+            // action.reviews.forEach((el) => {
+            //     temp = Object.assign({}, el);
+            //     temp[temp.user_id] = Object.assign({}, temp)
+            //     reviews[action.businessId] = {...temp}
+            //     console.log(reviews)
+            // })
             temp = {}
             nextTemp = {}
             newState.reviews = {...reviews}
-            return {...state, reviews: newState.reviews}
+            return {...state, reviews: action.reviews}
         case ADD_REVIEW:
+            return {...state};
         case EDIT_REVIEW:
             newState = {...state};
-            newState.reviews[action.review.business_id][action.review.user_id] = action.review;
+            console.log(action.review)
+            newState.reviews[`${action.review.user_id}-${action.review.business_id}`] = action.review;
             return {...state, reviews: newState.reviews}
         case DELETE_REVIEW:
             newState = {...state};
-            delete newState.reviews[action.review.business_id][action.review.user_id]
+            delete newState.reviews[`${action.review.user_id}-${action.review.business_id}`]
             return {...state, reviews: newState.reviews}
         default:
             return state;

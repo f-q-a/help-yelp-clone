@@ -15,66 +15,59 @@ function BusinessPage() {
         return state.business
     })
     const to_str = String(businessId)
-    const reviews = useSelector(state => state.review)
+    const reviews = useSelector(state => Object.values(state.review.reviews))
     const [users, setUsers] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
     const [blockAdd, setBlockAdd] = useState(false);
-
-    const conditionalRenderForReview = () => {
+    const reviewExists = sessionUser && reviews.some((el) => {
+        return el.user_id === sessionUser.id;
+    })
+    useEffect(() => {
         console.log('IS session user home?', sessionUser)
         console.log('Is business home?', business[businessId])
-        if (sessionUser) {
-            for (const el in reviews[businessId]) {
-                console.log('Are we keying into reviews correctly?', el)
-                console.log(reviews)
-                if (Number(reviews[el]['user_id']) === Number(sessionUser.id)) {
-                    console.log('here we are', el['user_id'])
-                    setBlockAdd(true);
-                    break;
-                }
-            }
+        if(reviewExists) {
+            setBlockAdd(true);
+        }else{
+            setBlockAdd(false);
         }
-    }
+        return () => {
+            dispatch(reviewActions.getReviews(businessId));
+        }
+    },[sessionUser, reviewExists, businessId])
 
     useEffect(() => {
-        async function fetchData() {
-            await dispatch(businessActions.getBusiness(businessId))
-            const checkReviews = await dispatch(reviewActions.getReviews(businessId))
-            checkReviews.forEach(el => el.user_id === sessionUser.id ? setBlockAdd(true) : setBlockAdd(false))
-
-        }
-
-        fetchData();
+        dispatch(businessActions.getBusiness(businessId))
+        dispatch(reviewActions.getReviews(businessId));
 
     }, [businessId, dispatch]);
-    conditionalRenderForReview();
 
 
 
-        return (
-            <div>
-                {business.businesses[to_str] ? (
+
+    return (
+        <div>
+            {business.businesses[to_str] ? (
+                <div>
+                    {business.businesses[to_str].business_name}
                     <div>
-                        {business.businesses[to_str].business_name}
-                        <div>
-                            {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
-                        </div>
-                        <div>Reviews</div>
-                        <div>
-                            {Object.values(business.businesses[to_str].reviews).map((review, index) => {
-                                console.log(review)
-                                return (<Review key={index} review={review} />);
-                            })}
-                        </div>
+                        {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
+                    </div>
+                    <div>Reviews</div>
+                    <div>
+                        {Object.values(reviews).map((review, index) => {
+                            console.log(review)
+                            return (<Review key={index} review={review} />);
+                        })}
+                    </div>
 
-                        {blockAdd === true ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/new-review`}>Add New Review</Link>{' '}</div>)}
+                    {sessionUser && (blockAdd === true ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/new-review`}>Add New Review</Link>{' '}</div>))}
 
 
 
-                    </div>) : (<div>
-                        Loading...
-                    </div>)}
-            </div>
-        );
+                </div>) : (<div>
+                    Loading...
+                </div>)}
+        </div>
+    );
 }
 export default BusinessPage;

@@ -12,6 +12,7 @@ class BusinessService(db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
 
+
     def to_dict(self):
         return {
             "business_id": self.business_id,

@@ -11,13 +11,12 @@ business_routes = Blueprint('business', __name__)
 
 @business_routes.route('/')
 def businesses():
-    businesses = db.session.query(Business).all()
+    businesses = Business.query.all()
     b_dict = [business.to_dict() for business in businesses]
     for dict in b_dict:
         dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
         temp = db.session.query(BusinessCategory).filter(BusinessCategory.id == dict['category_id']).first()
         dict['category'] = temp.to_dict()
-    print(b_dict)
     return jsonify(b_dict)
 
 
@@ -29,23 +28,22 @@ def business(id):
     #                               .join(Service, Service.id == BusinessService.service_id)\
     #                               .filter(Business.id == id)\
     #                               .all()
-    business = db.session.query(Business, BusinessCategory.name, BusinessService, Service.desc).join(Service).filter(Business.id == id, Business.category_id == BusinessCategory.id, Business.id ==BusinessService.business_id).all()
-    print(business)
-    b_dict = {}
-    for x in range(len(business)):
-        business[x] = list(business[x])
-    print(business)
+    business = Business.query.get(id)
+    print('Is this even working?', business)
+    b_dict = business.to_dict()
+    print('This is Business', b_dict)
 
-    for x in business:
-        b_dict = x[0].to_dict()
-        b_dict['reviews'] = [review.to_dict() for review in x[0].reviews]
-        print(x[0].reviews)
-        b_dict['category'] = x[1]
-        if 'services' in b_dict:
-            b_dict['services'].append(x[3])
-        else:
-            b_dict['services'] = []
-            b_dict['services'].append(x[3])
+    # for x in business:
 
-    print(b_dict)
+    #     b_dict = x[0].to_dict()
+    #     b_dict['reviews'] = [review.to_dict() for review in x[0].reviews]
+    #     print(x[0].reviews)
+    #     b_dict['category'] = x[1]
+    #     if 'services' in b_dict:
+    #         b_dict['services'].append(x[3])
+    #     else:
+    #         b_dict['services'] = []
+    #         b_dict['services'].append(x[3])
+
+    # print('Am I working?', b_dict)
     return  b_dict
