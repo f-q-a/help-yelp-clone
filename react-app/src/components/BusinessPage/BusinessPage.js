@@ -55,7 +55,6 @@ function BusinessPage() {
                     <div>Reviews</div>
                     <div>
                         {Object.values(reviews).map((review, index) => {
-                            console.log(review)
                             return (<Review key={index} review={review} />);
                         })}
                     </div>
