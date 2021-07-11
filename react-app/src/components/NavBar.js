@@ -11,7 +11,7 @@ const NavBar = () => {
 
 
     return (sessionUser ? (
-      <div className='relative flex items-center justify-between h-16 bg-red-500 py-2 '>
+      <div className='relative flex items-center justify-between h-16 bg-red-500 py-2'>
         <div className='align-start	overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
         <NavLink  to="/" exact={true}>
           Home

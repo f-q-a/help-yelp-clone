@@ -31,10 +31,10 @@ function Splash() {
 
       }
 
-      for(let i = 0; i < el['services'].length; i++){
+      for (let i = 0; i < el['services'].length; i++) {
         console.log(el['services'][i])
-        if(el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)){
-          temp.push({...el})
+        if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
+          temp.push({ ...el })
         }
       }
 
@@ -65,20 +65,23 @@ function Splash() {
 
   {
     return businesses ? (
-      <div className='flex h-screen'>
-        <form onSubmit={handleSubmit} className='left-200'>
-          <div className='flex items-center rounded-full shadow-xl'>
-            <input className='w-full rounded p-2 w-200'
+      <div className='flex justify-center'>
+        <div className='absolute top-1/4'>
+          <form onSubmit={handleSubmit} className='flex justify-between rounded-full shadow-xl w-1000 h-7'>
+            <input className='w-full h-7 rounded p-2'
               name="search"
               type="text"
               placeholder="search"
               value={search}
               onChange={handleChange}
             />
-            <button type='submit' className='materials-ui'><i className="material-icons">search</i></button>
-          </div>
-        </form>
-        {searchResults.map((business, idx) => <div key={idx}> <SearchResults business={business} /> </div>)}
+            <button type='submit' className="material-icons">search</button>
+          </form>
+          <div className='flex flex-col justify center'>{searchResults.map((business, idx) =><div key={idx} className='flex flex-col mt-5'> <SearchResults business={business}/></div>)}</div>
+        </div>
+
+
+
       </div>
     ) : (<div>Loading...</div>)
   }
