@@ -1,7 +1,7 @@
 from app.models.service import Service
 from app.models.business_service import BusinessService
 from app.models.category import BusinessCategory
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Business, BusinessCategory, BusinessService, Service, db
 from collections import defaultdict
@@ -14,9 +14,12 @@ def businesses():
     businesses = Business.query.all()
     b_dict = [business.to_dict() for business in businesses]
     for dict in b_dict:
-        dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
-        temp = db.session.query(BusinessCategory).filter(BusinessCategory.id == dict['category_id']).first()
+        dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(
+            dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
+        temp = db.session.query(BusinessCategory).filter(
+            BusinessCategory.id == dict['category_id']).first()
         dict['category'] = temp.to_dict()
+    print('These are all the businesses------>', b_dict)
     return jsonify(b_dict)
 
 
@@ -31,6 +34,9 @@ def business(id):
     business = Business.query.get(id)
     print('Is this even working?', business)
     b_dict = business.to_dict()
+    b_dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(b_dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
+    temp = db.session.query(BusinessCategory).filter(BusinessCategory.id == b_dict['category_id']).first()
+    b_dict['category'] = temp.to_dict()
     print('This is Business', b_dict)
 
     # for x in business:
@@ -46,4 +52,29 @@ def business(id):
     #         b_dict['services'].append(x[3])
 
     # print('Am I working?', b_dict)
-    return  b_dict
+    return b_dict
+
+@business_routes.route('/<int:b_id>/edit', methods=['POST'])
+def edit_business(b_id):
+    res = request.get_json()
+    business = Business.query.get(b_id)
+    print('Look here', res)
+    business.business_name = res['business_name']
+    business.address = res['address']
+    business.city = res['city']
+    business.state = res['state']
+    business.zipcode = res['zipcode']
+    business.phone_number = res['phone_number']
+    business.category_id = res['category_id']
+    business.updated_at = db.func.now()
+    db.session.commit()
+    return business.to_dict()
+
+
+@business_routes.route('/<int:b_id>/delete', methods=['DELETE'])
+def delete_business(b_id):
+    business = Business.query.get(b_id)
+    temp = business.to_dict()
+    db.session.delete(business)
+    db.session.commit()
+    return temp

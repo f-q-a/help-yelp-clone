@@ -1,5 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.container {
+/* .container {
     display: grid;
     grid-template-columns: 1fr 2.5fr 1fr;
     grid-template-rows: 0.2fr 2.5fr 0.4fr;
@@ -14,4 +17,4 @@
 .footer { grid-area: footer; }
 .navbar.ul {
         list-style-type: none;
-    }
+    } */

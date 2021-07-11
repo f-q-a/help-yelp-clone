@@ -65,18 +65,17 @@ function Splash() {
 
   {
     return businesses ? (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="search">Search</label>
-            <input
+      <div className='flex h-screen'>
+        <form onSubmit={handleSubmit} className='left-200'>
+          <div className='flex items-center rounded-full shadow-xl'>
+            <input className='w-full rounded p-2 w-200'
               name="search"
               type="text"
               placeholder="search"
               value={search}
               onChange={handleChange}
             />
-            <button type='submit'>Submit</button>
+            <button type='submit' className='materials-ui'><i className="material-icons">search</i></button>
           </div>
         </form>
         {searchResults.map((business, idx) => <div key={idx}> <SearchResults business={business} /> </div>)}

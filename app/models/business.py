@@ -15,7 +15,7 @@ class Business(db.Model):
     # longitude = db.Column(db.Float(precision=53), nullable=False)
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(255), nullable=False)
-    zipcode = db.Column(db.Integer, nullable=False)
+    zipcode = db.Column(db.String(255), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey(
         'business_categories.id'), nullable=False)
     phone_number = db.Column(db.String, nullable=False)

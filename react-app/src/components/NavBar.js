@@ -7,43 +7,63 @@ import DemoLogin from './auth/DemoLogin';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user)
-  return (
-    <nav>
-      <ul className='grid grid-cols-8 bg-red-500'>
-        <li>
-          <NavLink className='col-start-1 col-end-3' to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className='' to="/users" exact={true} activeClassName="active">
+
+
+
+    return (sessionUser ? (
+      <div className='relative flex items-center justify-between h-16 bg-red-500 py-2 '>
+        <div className='align-start	overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+        <NavLink  to="/" exact={true}>
+          Home
+        </NavLink>
+        </div>
+        <div className='justify-start	overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+          <NavLink  to="/users" exact={true}>
             Users
           </NavLink>
-        </li>
-        <li>
-          <NavLink className='col-start-7 col-end-8' to="/sign-up" exact={true} activeClassName="active">
+        </div>
+        <div>
+          <div className='justify-center text-white text-lg'>
+            HELP
+        </div>
+        </div>
+        <div className='justify-end overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+          <NavLink  to="/sign-up" exact={true}>
             Sign Up
           </NavLink>
-        </li>
-
-
-        {sessionUser ? (<li><LogoutButton /> </li>) :
-          (<>
-            <li>
-              <NavLink className='col-start-5 col-end-6' to="/login" exact={true} activeClassName="active">
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <DemoLogin />
-            </li>
-          </>
-          )
-        }
-
-      </ul>
-    </nav>
-  );
+        </div>
+        <div className='align-end overflow-hidden transition duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+          <LogoutButton />
+        </div>
+      </div>
+      ) : (
+      <div className='grid grid-cols-7 overflow-hidden bg-red-500 '>
+      <div className='col-start-1	overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+      <NavLink  to="/" exact={true}>
+        Home
+      </NavLink>
+      </div>
+      <div className='col-start-2	overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+        <NavLink  to="/users" exact={true}>
+          Users
+        </NavLink>
+      </div>
+      <div className='col-start-6 overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+        <NavLink  to="/sign-up" exact={true}>
+          Sign Up
+        </NavLink>
+      </div>
+        <div className='col-start-7 overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
+          <NavLink to="/login" exact={true}>
+            Login
+          </NavLink>
+        </div>
+        <div>
+          <DemoLogin />
+        </div>
+        </div>
+      )
+      );
 }
 
 export default NavBar;

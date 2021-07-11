@@ -9,9 +9,6 @@ function BusinessPage() {
     const { businessId, userId } = useParams();
     const dispatch = useDispatch();
     const business = useSelector(state => {
-        console.log(state);
-        console.log(businessId);
-        console.log(state['business']);
         return state.business
     })
     const to_str = String(businessId)
@@ -43,16 +40,23 @@ function BusinessPage() {
 
 
 
-
     return (
         <div>
             {business.businesses[to_str] ? (
                 <div>
-                    {business.businesses[to_str].business_name}
+                    <h2>{business.businesses[to_str].business_name}</h2>
+                    <h3>{`${business.businesses[to_str]['category'].name}`}</h3>
                     <div>
                         {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
                     </div>
-                    <div>Reviews</div>
+                    <h3>Services Offered</h3>
+                    <ul>
+                        {Object.values(business.businesses[to_str].services).map((el) => {
+                                return (<li key={el.id}>{el.desc} </li>);
+                            })}
+                    </ul>
+                    <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/edit-business`}>Edit Business</Link>{' '}</div>))} </div>
+                    <h3>Reviews</h3>
                     <div>
                         {Object.values(reviews).map((review, index) => {
                             return (<Review key={index} review={review} />);

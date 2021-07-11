@@ -49,7 +49,6 @@ def edit_review(b_id,u_id):
     review.body = res['review']
     review.rating = res['newRating']
     review.updated_at = db.func.now()
-    db.session.add(review)
     db.session.commit()
     return review.to_dict()
 

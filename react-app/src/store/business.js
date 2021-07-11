@@ -1,8 +1,9 @@
 // import { createChannelAction } from './channels'
 // import * as ChannelActions from './channel'
 const GET_BUSINESSES = "business/GET_BUSINESSES"
-
 const GET_BUSINESS = "business/GET_BUSINESS"
+const EDIT_BUSINESS = "BUSINESS/EDIT_BUSINESS"
+const DELETE_BUSINESS = "BUSINESS/DELETE_BUSINESS"
 
 const setBusinesses = (businesses) => ({
     type: GET_BUSINESSES,
@@ -14,13 +15,24 @@ const setBusiness = (business) => ({
     business
 })
 
+const editBusinessAction = (business) => ({
+    type: EDIT_BUSINESS,
+    business
+})
+
+const deleteBusinessAction = (business) => ({
+    type: DELETE_BUSINESS,
+    business
+})
+
+
 export const getBusinesses = () => async (dispatch) => {
     const response = await fetch(`/api/business/`)
     const data = await response.json();
     if (data.errors){
         return data
     } else {
-        dispatch(setBusinesses(data.businesses))
+        dispatch(setBusinesses(data))
         return data
     }
 }
@@ -36,6 +48,43 @@ export const getBusiness = (businessId) => async (dispatch) => {
     }
 }
 
+export const deleteBusiness = (business) => async (dispatch) => {
+    const response = await fetch(`/api/business/${business.id}/delete`,{
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(business)
+    }
+
+    )
+    const data = await response.json();
+    if (data.errors){
+        return data
+    } else {
+        dispatch(deleteBusinessAction(data))
+        return data
+    }
+}
+
+export const editBusiness = (business) => async (dispatch) => {
+    const response = await fetch(`/api/business/${business.id}/edit`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(business)
+
+    })
+    const data = await response.json();
+    console.log(data)
+    if (data.errors){
+        return data
+    } else {
+        dispatch(editBusinessAction(data))
+        return data
+    }
+}
 const initialState = {businesses: {}}
 export default function reducer(state = initialState, action) {
     let newState;
@@ -49,6 +98,14 @@ export default function reducer(state = initialState, action) {
             console.log(action.business)
             newState.businesses[action.business.id] = action.business;
             console.log(newState.businesses)
+            return {...state, businesses: newState.businesses}
+        case EDIT_BUSINESS:
+            newState = {...state};
+            newState.businesses[action.business.id] = action.business;
+            return {...state, businesses: newState.businesses}
+        case DELETE_BUSINESS:
+            newState = {...state};
+            delete newState.businesses[action.business.id]
             return {...state, businesses: newState.businesses}
         default:
             return state;
