@@ -75,7 +75,7 @@ def edit_business(b_id):
     res = request.get_json()
     business = Business.query.get(b_id)
     service = Service.query.filter(Service.business_id == b_id)
-    [print(serv.to_dict()) for serv in service]
+    [print('Hello whats going on?', serv.to_dict()) for serv in service]
     business.business_name = res['business_name']
     business.address = res['address']
     business.city = res['city']

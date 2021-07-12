@@ -4,7 +4,9 @@ import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
 import { useDispatch, useSelector } from "react-redux";
 import Review from './Review'
+import { Rating } from '@material-ui/lab';
 import { Link, useHistory } from 'react-router-dom'
+
 function BusinessPage() {
     const { businessId, userId } = useParams();
     const dispatch = useDispatch();
@@ -45,8 +47,9 @@ function BusinessPage() {
         <div>
             {business.businesses[to_str] ? (
                 <div>
-                    <h2>{business.businesses[to_str].business_name}</h2>
+                    <div>{business.businesses[to_str].business_name}</div>
                     <h3>{`${business.businesses[to_str]['category'].name}`}</h3>
+                    Average Rating: <Rating name="half-rating-read" defaultValue={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
                     <div>
                         {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
                     </div>
@@ -57,8 +60,8 @@ function BusinessPage() {
                             })}
                     </ul>
                     <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/edit-business`}>Edit Business</Link>{' '}</div>))} </div>
-                    <h3>Reviews</h3>
-                    <div>
+                    <div className='mt-5'>Reviews</div>
+                    <div className='space-y-3'>
                         {Object.values(reviews).map((review, index) => {
                             return (<Review key={index} review={review} />);
                         })}

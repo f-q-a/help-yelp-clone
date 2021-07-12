@@ -13,7 +13,7 @@ function SearchResults(props) {
     })
     return (
         <div>
-            <div><Link to={`/business/${Number(business.id)}`}>{String(business['business_name'])}</Link> {<Rating value={business.rating} precision={0.1}/>}</div>
+            <div><Link to={`/business/${Number(business.id)}`}>{String(business['business_name'])}</Link> <Rating size='small' name="half-rating-read" defaultValue={business['avg_rating']} precision={0.1} readOnly /></div>
             <div>{business.address},  {business.city}, {business.state}, {business.zipcode} </div>
             <div>{business.phone_number}</div>
         </div>
