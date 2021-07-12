@@ -15,6 +15,11 @@ const setBusiness = (business) => ({
     business
 })
 
+const addBusinessAction = (business) => ({
+    type: ADD_BUSINESS,
+    business
+})
+
 const editBusinessAction = (business) => ({
     type: EDIT_BUSINESS,
     business
@@ -37,6 +42,7 @@ export const getBusinesses = () => async (dispatch) => {
     }
 }
 
+
 export const getBusiness = (businessId) => async (dispatch) => {
     const response = await fetch(`/api/business/${businessId}`)
     const data = await response.json();
@@ -44,6 +50,25 @@ export const getBusiness = (businessId) => async (dispatch) => {
         return data
     } else {
         dispatch(setBusiness(data))
+        return data
+    }
+}
+
+export const addReview = (business) => async (dispatch) => {
+    const response = await fetch(`/api/business`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(business)
+    }
+
+    )
+    const data = await response.json();
+    if (data.errors){
+        return data
+    } else {
+        dispatch(addReviewAction(data))
         return data
     }
 }
