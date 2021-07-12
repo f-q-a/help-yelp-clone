@@ -70,6 +70,23 @@ def business(id):
     # print('Am I working?', b_dict)
     return b_dict
 
+@business_routes.route('/new-business', methods=['POST'])
+def add_business():
+    res = request.get_json()
+    business = Business(
+        business_name = res['business_name'],
+        address = res['address'],
+        city = res['city'],
+        state = res['state'],
+        zipcode = res['zipcode'],
+        phone_number = res['phone_number'],
+        category_id = res['category_id'],
+        business_img = "",
+    )
+    db.session.add(business)
+    db.session.commit()
+    return business.to_dict()
+
 @business_routes.route('/<int:b_id>/edit', methods=['POST'])
 def edit_business(b_id):
     res = request.get_json()
