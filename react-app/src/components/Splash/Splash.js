@@ -10,6 +10,7 @@ function Splash() {
   const [businesses, setBusinesses] = useState([])
   const [searchResults, setSearchResults] = useState([])
   const handleSubmit = (e) => {
+
     e.preventDefault();
     let temp = [];
     businesses.forEach(el => {
