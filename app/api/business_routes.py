@@ -18,13 +18,19 @@ def businesses():
             dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
         temp = db.session.query(BusinessCategory).filter(
             BusinessCategory.id == dict['category_id']).first()
-        dict['category'] = temp.to_dict()
+        t_dict = temp.to_dict()
+        print('is this working?', t_dict)
+        dict['category'] = t_dict['name']
         reviews = Review.query.filter(Review.business_id == dict['id']).all()
         print('Are we querying this correctly?', reviews)
         r_dict = [review.to_dict() for review in reviews]
         rating = [review['rating'] for review in r_dict]
-        avg_rating = (sum(rating)/len(rating))
-        dict['avg_rating'] = round(avg_rating, 2)
+        if (len(rating) >= 1):
+            avg_rating = (sum(rating)/len(rating))
+            dict['avg_rating'] = avg_rating
+        else:
+            avg_rating = (sum(rating)/1)
+            dict['avg_rating'] = round(avg_rating, 2)
     print('These are all the businesses------>', b_dict)
     return jsonify(b_dict)
 
@@ -40,20 +46,24 @@ def business(id):
     business = Business.query.get(id)
     print('Is this even working?', business)
     b_dict = business.to_dict()
-    b_dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(b_dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
-    temp = db.session.query(BusinessCategory).filter(BusinessCategory.id == b_dict['category_id']).first()
+    b_dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(
+        b_dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
+    temp = db.session.query(BusinessCategory).filter(
+        BusinessCategory.id == b_dict['category_id']).first()
     reviews = Review.query.filter(Review.business_id == id).all()
     print('Are we querying this correctly?', reviews)
     r_dict = [review.to_dict() for review in reviews]
-
 
     b_dict['category'] = temp.to_dict()
 
     print('This is Business', r_dict)
     rating = [review['rating'] for review in r_dict]
-    avg_rating = (sum(rating)/len(rating))
-    b_dict['avg_rating'] = avg_rating
-    print('this is avg rating', avg_rating)
+    if (len(rating) >= 1):
+        avg_rating = (sum(rating)/len(rating))
+        b_dict['avg_rating'] = avg_rating
+    else:
+        avg_rating = (sum(rating)/1)
+        b_dict['avg_rating'] = avg_rating
 
     # for x in business:
 
@@ -70,29 +80,35 @@ def business(id):
     # print('Am I working?', b_dict)
     return b_dict
 
+
 @business_routes.route('/new-business', methods=['POST'])
 def add_business():
     res = request.get_json()
     business = Business(
-        business_name = res['business_name'],
-        address = res['address'],
-        city = res['city'],
-        state = res['state'],
-        zipcode = res['zipcode'],
-        phone_number = res['phone_number'],
-        category_id = res['category_id'],
-        business_img = "",
+        business_name=res['business_name'],
+        address=res['address'],
+        city=res['city'],
+        state=res['state'],
+        zipcode=res['zipcode'],
+        phone_number=res['phone_number'],
+        category_id=res['category_id'],
+        business_img="",
+        owner=res['owner']
     )
     db.session.add(business)
     db.session.commit()
     return business.to_dict()
 
+
 @business_routes.route('/<int:b_id>/edit', methods=['POST'])
 def edit_business(b_id):
     res = request.get_json()
+    print('Whats going on here?', res)
     business = Business.query.get(b_id)
-    service = Service.query.filter(Service.business_id == b_id)
-    [print('Hello whats going on?', serv.to_dict()) for serv in service]
+    service = BusinessService.query.filter(BusinessService.business_id == b_id)
+    temp = db.session.query(BusinessCategory).filter(
+        BusinessCategory.id == business.category_id).first()
+    temp.to_dict()
     business.business_name = res['business_name']
     business.address = res['address']
     business.city = res['city']
@@ -102,7 +118,9 @@ def edit_business(b_id):
     business.category_id = res['category_id']
     business.updated_at = db.func.now()
     db.session.commit()
-    return business.to_dict()
+    b_dict = business.to_dict()
+    b_dict['category'] = {'name': temp.name}
+    return b_dict
 
 
 @business_routes.route('/<int:b_id>/delete', methods=['DELETE'])

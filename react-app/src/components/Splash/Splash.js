@@ -23,7 +23,7 @@ function Splash() {
         console.log(tempArr)
         console.log(category)
 
-        if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category['name'].toLowerCase().indexOf(search.toLowerCase()) !== -1) {
+        if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
 
         }
@@ -57,7 +57,6 @@ function Splash() {
     async function fetchData() {
       const response = await fetch("/api/business/");
       const responseData = await response.json();
-      console.log(responseData)
       setBusinesses(responseData);
     }
     fetchData();

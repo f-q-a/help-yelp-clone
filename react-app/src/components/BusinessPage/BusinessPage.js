@@ -34,7 +34,7 @@ function BusinessPage() {
         return () => {
             dispatch(reviewActions.getReviews(businessId));
         }
-    },[sessionUser, reviewExists, businessId])
+    },[sessionUser, business, reviewExists, businessId])
 
     useEffect(() => {
         dispatch(businessActions.getBusiness(businessId))
@@ -48,9 +48,10 @@ function BusinessPage() {
             {business.businesses[to_str] ? (
                 <div>
                     <div>{business.businesses[to_str].business_name}</div>
-                    <h3>{`${business.businesses[to_str]['category'].name}`}</h3>
-                    Average Rating: <Rating name="half-rating-read" defaultValue={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
+                    <div>{business.businesses[to_str].category.name}</div>
+                    Average Rating: <Rating name="half-rating-read" value={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
                     <div>
+
                         {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
                     </div>
                     <h3>Services Offered</h3>

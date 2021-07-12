@@ -9,13 +9,12 @@ import * as businessActions from '../../store/business'
 
 
 function AddBusiness() {
-    const { businessId, userId } = useParams();
+
     const history = useHistory();
     const dispatch = useDispatch();
-
+    const sessionUser = useSelector(state => state.session.user)
     const businesses = useSelector(state => state.business.businesses)
-    const business = businesses[`${businessId}`]
-    const [categoryId, setCategoryId] = useState(0);
+    const [categoryId, setCategoryId] = useState(1);
     const [address, setAddress] = useState('');
     const [businessState, setBusinessState] = useState('');
     const [zipcode, setZipcode] = useState('');
@@ -26,34 +25,20 @@ function AddBusiness() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const businessUpdate = { 'id': businessId, 'business_name': businessName, 'address': address, 'city': city, 'state': businessState, 'zipcode': zipcode, 'category_id': categoryId, 'phone_number': phoneNumber, 'business_img': '', 'services': services }
-        await dispatch(businessActions.editBusiness(businessUpdate))
-        history.push(`/business/${businessId}`)
+        const businessUpdate = {'business_name': businessName, 'address': address, 'city': city, 'state': businessState, 'zipcode': zipcode, 'owner':sessionUser.id, 'category_id': categoryId, 'phone_number': phoneNumber, 'business_img': ''}
+        await dispatch(businessActions.addBusiness(businessUpdate))
+        history.push(`/`)
 
     }
 
     useEffect(() => {
         async function fetchData() {
-            await dispatch(businessActions.getBusiness(businessId))
-            setCategoryId(business.category_id)
-            setAddress(business.address)
-            setBusinessName(business.name)
-            setPhoneNumber(business.phone_number)
-            setCity(business.city)
-            setBusinessState(business.state)
-            setZipcode(business.zipcode)
-            setServices(business.services)
+            await dispatch(businessActions.getBusinesses())
         }
         fetchData();
-    }, [businessId, business, dispatch]);
+    }, [dispatch]);
 
-    if (!business) {
-        return (
-            <div>
-                Loading...
-            </div>
-        );
-    } return (
+    return (
         <form onSubmit={handleSubmit}>
             <div>
                 <h2>New Business</h2>
@@ -63,7 +48,6 @@ function AddBusiness() {
                         <input
                             name="business_name"
                             type="text"
-                            placeholder={business['business_name']}
                             value={businessName}
                             onChange={(e) => setBusinessName(e.target.value)}
                             required
@@ -77,7 +61,6 @@ function AddBusiness() {
                         <input
                             name="address"
                             type="text"
-                            placeholder={business.address}
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             required
@@ -90,7 +73,6 @@ function AddBusiness() {
                         <input
                             name="city"
                             type="text"
-                            placeholder={business.city}
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             required
@@ -103,7 +85,6 @@ function AddBusiness() {
                         <input
                             name="state"
                             type="text"
-                            placeholder={business.state}
                             value={businessState}
                             onChange={(e) => setBusinessState(e.target.value)}
                             required
@@ -116,7 +97,6 @@ function AddBusiness() {
                         <input
                             name="zipcode"
                             type="text"
-                            placeholder={business.zipcode}
                             value={zipcode}
                             onChange={(e) => setZipcode(e.target.value)}
                             required
@@ -129,7 +109,6 @@ function AddBusiness() {
                         <input
                             name="phone_number"
                             type="text"
-                            placeholder={business.phone_number}
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             required
@@ -156,10 +135,10 @@ function AddBusiness() {
                     />
                     </label> */}
             </div>
-            <button type="submit">Submit Review</button>
+            <button type="submit">Add Business</button>
         </form>
 
     );
 }
 
-export default AddReview
+export default AddBusiness

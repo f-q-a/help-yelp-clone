@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import DemoLogin from './auth/DemoLogin';
-
+import AddBusiness from '../components/BusinessPage/AddBusiness'
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user)
@@ -26,11 +26,11 @@ const NavBar = () => {
           <div className='justify-center text-white text-lg'>
             HELP
         </div>
-        </div>
-        <div className='justify-end overflow-hidden duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
-          <NavLink  to="/sign-up" exact={true}>
-            Sign Up
+        <div>
+        <NavLink  to="/new-business" exact={true}>
+            Add Business
           </NavLink>
+        </div>
         </div>
         <div className='align-end overflow-hidden transition duration-500 ease-in-out hover:text-white transform hover:scale-110 active:text-white active:scale-110'>
           <LogoutButton />

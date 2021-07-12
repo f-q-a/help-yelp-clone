@@ -13,7 +13,7 @@ function EditBusiness() {
     const dispatch = useDispatch();
 
     const businesses = useSelector(state => state.business.businesses)
-    const business = businesses[`${businessId}`]
+    const business = businesses[businessId]
     const [categoryId, setCategoryId] = useState(0);
     const [address, setAddress] = useState('');
     const [businessState, setBusinessState] = useState('');
@@ -41,17 +41,18 @@ function EditBusiness() {
     useEffect(() => {
         async function fetchData() {
             await dispatch(businessActions.getBusiness(businessId))
-            setCategoryId(business.category_id)
-            setAddress(business.address)
-            setBusinessName(business.name)
-            setPhoneNumber(business.phone_number)
-            setCity(business.city)
-            setBusinessState(business.state)
-            setZipcode(business.zipcode)
-            setServices(business.services)
+
         }
         fetchData();
-    }, [businessId, business, dispatch]);
+        setCategoryId(business.category_id)
+        setAddress(business.address)
+        setBusinessName(business.business_name)
+        setPhoneNumber(business.phone_number)
+        setCity(business.city)
+        setBusinessState(business.state)
+        setZipcode(business.zipcode)
+        setServices(business.services)
+    }, [businessId, businesses, dispatch]);
 
     if (!business) {
         return (

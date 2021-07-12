@@ -4,6 +4,7 @@ const GET_BUSINESSES = "business/GET_BUSINESSES"
 const GET_BUSINESS = "business/GET_BUSINESS"
 const EDIT_BUSINESS = "BUSINESS/EDIT_BUSINESS"
 const DELETE_BUSINESS = "BUSINESS/DELETE_BUSINESS"
+const ADD_BUSINESS = 'BUSINESS/ADD_BUSINESS'
 
 const setBusinesses = (businesses) => ({
     type: GET_BUSINESSES,
@@ -54,8 +55,8 @@ export const getBusiness = (businessId) => async (dispatch) => {
     }
 }
 
-export const addReview = (business) => async (dispatch) => {
-    const response = await fetch(`/api/business`,{
+export const addBusiness = (business) => async (dispatch) => {
+    const response = await fetch(`/api/business/new-business`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ export const addReview = (business) => async (dispatch) => {
     if (data.errors){
         return data
     } else {
-        dispatch(addReviewAction(data))
+        dispatch(addBusinessAction(data))
         return data
     }
 }
@@ -124,6 +125,8 @@ export default function reducer(state = initialState, action) {
             newState.businesses[action.business.id] = action.business;
             console.log(newState.businesses)
             return {...state, businesses: newState.businesses}
+        case ADD_BUSINESS:
+            return {...state}
         case EDIT_BUSINESS:
             newState = {...state};
             newState.businesses[action.business.id] = action.business;

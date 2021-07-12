@@ -14,6 +14,7 @@ import AddReview from './components/BusinessPage/AddReview'
 import SearchResults from './components/Splash/SearchResults'
 import { authenticate } from "./store/session";
 import EditBusiness from "./components/BusinessPage/EditBusiness";
+import  AddBusiness from "./components/BusinessPage/AddBusiness";
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
@@ -54,6 +55,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/business/:businessId/:userId/edit-business' exact={true}>
           <EditBusiness/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/new-business' exact={true}>
+          <AddBusiness/>
         </ProtectedRoute>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList/>
