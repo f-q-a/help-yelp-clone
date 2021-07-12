@@ -12,6 +12,8 @@ function BusinessPage() {
         return state.business
     })
     const to_str = String(businessId)
+
+
     const reviews = useSelector(state => Object.values(state.review.reviews))
     const [users, setUsers] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
@@ -35,7 +37,6 @@ function BusinessPage() {
     useEffect(() => {
         dispatch(businessActions.getBusiness(businessId))
         dispatch(reviewActions.getReviews(businessId));
-
     }, [businessId, dispatch]);
 
 

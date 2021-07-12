@@ -3,7 +3,7 @@ from app.models.business_service import BusinessService
 from app.models.category import BusinessCategory
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Business, BusinessCategory, BusinessService, Service, db
+from app.models import Business, Review, BusinessCategory, BusinessService, Service, db
 from collections import defaultdict
 
 business_routes = Blueprint('business', __name__)
@@ -19,6 +19,12 @@ def businesses():
         temp = db.session.query(BusinessCategory).filter(
             BusinessCategory.id == dict['category_id']).first()
         dict['category'] = temp.to_dict()
+        reviews = Review.query.filter(Review.business_id == dict['id']).all()
+        print('Are we querying this correctly?', reviews)
+        r_dict = [review.to_dict() for review in reviews]
+        rating = [review['rating'] for review in r_dict]
+        avg_rating = (sum(rating)/len(rating))
+        dict['avg_rating'] = round(avg_rating, 2)
     print('These are all the businesses------>', b_dict)
     return jsonify(b_dict)
 
@@ -36,8 +42,18 @@ def business(id):
     b_dict = business.to_dict()
     b_dict['services'] = [service.to_dict() for service in db.session.query(Service).join(BusinessService).filter(b_dict['id'] == BusinessService.business_id, BusinessService.service_id == Service.id)]
     temp = db.session.query(BusinessCategory).filter(BusinessCategory.id == b_dict['category_id']).first()
+    reviews = Review.query.filter(Review.business_id == id).all()
+    print('Are we querying this correctly?', reviews)
+    r_dict = [review.to_dict() for review in reviews]
+
+
     b_dict['category'] = temp.to_dict()
-    print('This is Business', b_dict)
+
+    print('This is Business', r_dict)
+    rating = [review['rating'] for review in r_dict]
+    avg_rating = (sum(rating)/len(rating))
+    b_dict['avg_rating'] = avg_rating
+    print('this is avg rating', avg_rating)
 
     # for x in business:
 
@@ -58,7 +74,8 @@ def business(id):
 def edit_business(b_id):
     res = request.get_json()
     business = Business.query.get(b_id)
-    print('Look here', res)
+    service = Service.query.filter(Service.business_id == b_id)
+    [print(serv.to_dict()) for serv in service]
     business.business_name = res['business_name']
     business.address = res['address']
     business.city = res['city']
