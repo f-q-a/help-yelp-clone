@@ -6,6 +6,7 @@ import { signUp } from '../../store/session';
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +16,11 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
+      if(data.errors){
+        setErrors(data.errors);
+      }
+    }else{
+      setErrors([...errors, 'Password and Repeat Password do not match, please fix this and try again.'])
     }
   };
 
@@ -40,6 +46,11 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp}>
+      <div>
+          {errors.map((el, idx) => {
+            return(<div key={idx}>{el}</div>)
+          })}
+        </div>
       <div>
         <label>User Name</label>
         <input
