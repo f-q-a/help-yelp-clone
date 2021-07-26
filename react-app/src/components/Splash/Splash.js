@@ -45,7 +45,7 @@ function Splash() {
     //   idx === self.findIndex((t) => (
     //     t['id'] === el["id"] && t['business_name'] === el['business_name']
     //   ))
-    // ) //This code is based on an answer from user Eydrian on Github (https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects), check to see if it's ok to use it before putting it in the final product. 
+    // ) //This code is based on an answer from user Eydrian on Github (https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects), check to see if it's ok to use it before putting it in the final product.
     setSearchResults([...temp])
 
     const categoryFilter = () => {
@@ -68,7 +68,7 @@ function Splash() {
 
   {
     return businesses ? (
-      <div>
+      <div className=''>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="search">Search</label>

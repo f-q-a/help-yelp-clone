@@ -13,6 +13,7 @@ import EditReview from './components/BusinessPage/EditReview'
 import AddReview from './components/BusinessPage/AddReview'
 import SearchResults from './components/Splash/SearchResults'
 import { authenticate } from "./store/session";
+import './index.css'
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -20,7 +21,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -31,38 +32,41 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <Route path='/business/:businessId' exact={true}>
-          <BusinessPage/>
-        </Route>
-        <Route path='/search/:searchTerm'>
-          <SearchResults />
-        </Route>
-        <ProtectedRoute path='/business/:businessId/:userId/new-review' exact={true}>
-          <AddReview/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/business/:businessId/reviews/:userId/edit' exact={true}>
-          <EditReview/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users" exact={true}>
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true}>
-          <User />
-        </ProtectedRoute>
-        <Route path="/" exact={true} >
-          <Splash/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <div>
+
+      <BrowserRouter>
+      <NavBar/>
+        <Switch>
+          <Route path="/login" exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
+          </Route>
+          <Route path='/business/:businessId' exact={true}>
+            <BusinessPage />
+          </Route>
+          <Route path='/search/:searchTerm'>
+            <SearchResults />
+          </Route>
+          <ProtectedRoute path='/business/:businessId/:userId/new-review' exact={true}>
+            <AddReview />
+          </ProtectedRoute>
+          <ProtectedRoute path='/business/:businessId/reviews/:userId/edit' exact={true}>
+            <EditReview />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users" exact={true}>
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/:userId" exact={true}>
+            <User />
+          </ProtectedRoute>
+          <Route path="/" exact={true} >
+            <Splash className='main' />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
