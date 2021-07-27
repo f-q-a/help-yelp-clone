@@ -5,7 +5,7 @@
     align-items: flex-end;
     background-color: red;
   }
-  .navbar__item{
+  .navbar__item, .button__logout{
       font-weight: bold;
       font-size: 18px;
       padding: 5px;
@@ -26,4 +26,8 @@
     text-decoration: none;
     color: red;
     background-color: white;
+  }
+
+  .button__logout{
+      color: white;
   }
