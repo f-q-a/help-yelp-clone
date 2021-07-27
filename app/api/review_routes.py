@@ -23,7 +23,7 @@ review_routes = Blueprint('review', __name__)
 def review(b_id):
     reviews = Review.query.filter(Review.business_id == int(b_id)).all()
     print(reviews)  # TODO: I don't know man
-    return jsonify([review.to_dict() for review in reviews])
+    return {f'{review.user_id}-{review.business_id}': review.to_dict() for review in reviews}
 
 @review_routes.route('/<int:b_id>/<int:u_id>/add', methods=['POST'])
 def add_review(b_id,u_id):
@@ -49,7 +49,6 @@ def edit_review(b_id,u_id):
     review.body = res['review']
     review.rating = res['newRating']
     review.updated_at = db.func.now()
-    db.session.add(review)
     db.session.commit()
     return review.to_dict()
 

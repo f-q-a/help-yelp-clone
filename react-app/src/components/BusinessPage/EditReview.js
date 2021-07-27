@@ -8,26 +8,19 @@ import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
 
-function EditReview(props) {
+function EditReview() {
     const {businessId, userId} = useParams();
+    console.log(businessId, userId);
     const history = useHistory();
     const dispatch = useDispatch();
 
     const business = useSelector(state => state.business.businesses)
-    let currReview = '';
+    const reviews = useSelector(state => state.review.reviews)
+    const targetReview = reviews[`${userId}-${businessId}`]
 
-    const reviews = business[businessId]['reviews']
-
-    reviews.forEach(el => {
-
-        if (el['user_id'] === Number(userId)){
-            currReview = {...el};
-        }
-    })
-
-    const [newRating, setNewRating] = useState(Number(currReview.rating));
+    const [newRating, setNewRating] = useState(targetReview.rating);
     const [loading, setLoading] = useState(false);
-    const [newBody, setNewBody] = useState(String(currReview.body))
+    const [newBody, setNewBody] = useState(targetReview.body)
 
 
     useEffect(() => {
@@ -40,8 +33,7 @@ function EditReview(props) {
     const sessionUser = useSelector(state => state.session.user);
     const handleDelete = (e) => {
         e.preventDefault();
-        currReview.body = newBody;
-        dispatch(reviewActions.deleteReview(businessId, userId, currReview))
+        dispatch(reviewActions.deleteReview(businessId, userId, targetReview))
         history.push(`/business/${businessId}`)
 
     }

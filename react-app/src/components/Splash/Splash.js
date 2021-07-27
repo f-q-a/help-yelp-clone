@@ -11,6 +11,7 @@ function Splash() {
   const [businesses, setBusinesses] = useState([])
   const [searchResults, setSearchResults] = useState([])
   const handleSubmit = (e) => {
+
     e.preventDefault();
     let temp = [];
     businesses.forEach(el => {
@@ -24,7 +25,7 @@ function Splash() {
         console.log(tempArr)
         console.log(category)
 
-        if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category['name'].toLowerCase().indexOf(search.toLowerCase()) !== -1) {
+        if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
 
         }
@@ -32,10 +33,10 @@ function Splash() {
 
       }
 
-      for(let i = 0; i < el['services'].length; i++){
+      for (let i = 0; i < el['services'].length; i++) {
         console.log(el['services'][i])
-        if(el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)){
-          temp.push({...el})
+        if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
+          temp.push({ ...el })
         }
       }
 
@@ -49,9 +50,6 @@ function Splash() {
     // ) //This code is based on an answer from user Eydrian on Github (https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects), check to see if it's ok to use it before putting it in the final product.
     setSearchResults([...temp])
 
-    const categoryFilter = () => {
-    }
-
     // setSearchResults(businesses.filter(el => el.includes(search)));
   }
   const handleChange = (e) => {
@@ -61,7 +59,6 @@ function Splash() {
     async function fetchData() {
       const response = await fetch("/api/business/");
       const responseData = await response.json();
-      console.log(responseData)
       setBusinesses(responseData);
     }
     fetchData();

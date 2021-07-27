@@ -14,7 +14,7 @@ function AddReview() {
     const history = useHistory();
     const [body, setBody] = useState("");
     const sessionUser = useSelector(state => state.session.user);
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(1);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +28,7 @@ function AddReview() {
             <div>
                 <label>
                     Rating
-                    <select onChange={e => setRating(e.target.value)}>
+                    <select value={rating} onChange={e => setRating(e.target.value)}>
                        <option value={1}>1</option>
                        <option value={2}>2</option>
                        <option value={3}>3</option>
