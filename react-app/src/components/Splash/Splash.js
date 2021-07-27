@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getBusinesses } from '../../store/business'
 import SearchResults from "./SearchResults";
+import SearchIcon from '@material-ui/icons/Search';
 
 function Splash() {
 
@@ -68,10 +69,10 @@ function Splash() {
 
   {
     return businesses ? (
-      <div className=''>
-        <form onSubmit={handleSubmit}>
+      <div className='main-splash__container'>
+        <form className='main-splash__content' onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="search">Search</label>
+            <label htmlFor="search" className='main-business__label'>Search</label>
             <input
               name="search"
               type="text"
@@ -79,7 +80,7 @@ function Splash() {
               value={search}
               onChange={handleChange}
             />
-            <button type='submit'>Submit</button>
+            <button className='search__button' type='submit'>{<SearchIcon fontSize='small'/>}</button>
           </div>
         </form>
         {searchResults.map((business, idx) => <div key={idx}> <SearchResults business={business} /> </div>)}

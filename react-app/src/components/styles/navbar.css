@@ -1,0 +1,29 @@
+.navbar{
+    display: flex;
+    position: sticky;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: red;
+  }
+  .navbar__item{
+      font-weight: bold;
+      font-size: 18px;
+      padding: 5px;
+  }
+  .navbar__item-container{
+    display: flex;
+    margin-right: 1rem;
+    list-style: none;
+  }
+
+  .navbar__item a{
+    text-decoration: none;
+    color: white;
+    padding: 0.4rem;
+  }
+
+  .navbar__item a:hover{
+    text-decoration: none;
+    color: red;
+    background-color: white;
+  }
