@@ -20,13 +20,13 @@ const NavBar = () => {
             Users
           </NavLink>
         </li>
-        <li className='navbar__item'>
-          <NavLink className='' to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
         {sessionUser ? (<li className='navbar__item'><LogoutButton /> </li>) :
           (<>
+            <li className='navbar__item'>
+              <NavLink className='' to="/sign-up" exact={true} activeClassName="active">
+                Sign Up
+              </NavLink>
+            </li>
             <li className='navbar__item'>
               <NavLink className='' to="/login" exact={true} activeClassName="active">
                 Login
