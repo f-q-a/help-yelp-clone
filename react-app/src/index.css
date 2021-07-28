@@ -1,4 +1,131 @@
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+  overflow: hidden;
+}
+
+.demo__button{
+  background: none;
+  border: none;
+}
+
+.main-splash__header{
+  font-size: 8rem;
+  position: absolute;
+  top: 26vh;
+}
+
+.main-splash__container{
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-splash__main{
+  width: 40vw;
+  height: 4em;
+  position: relative;
+  /* box-shadow: 0px 0px 5px darkgray; */
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.main-splash__content{
+  width: calc(30vw);
+  height: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px darkgray;
+}
+
+.main-splash__searchbar{
+
+  width: 100%;
+  padding: 0 5px;
+}
+
+.main-splash__searchbar:focus{
+  outline: none;
+}
+
+.search__search-result{
+  padding: 7px;
+  margin: 4px;
+  margin-top: 9px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+}
+
+.search__business-title{
+  color: #EF4444;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.search__business-address{
+  font-size: 13px;
+  color: #555;
+}
+
+.search__business-phone{
+  font-size: 13px;
+  color: #EF4444;
+}
+
+.main-splash__help-text{
+  font-size: 1em;
+  font-weight: bolder;
+}
+
+.search-container{
+  height: 30vh;
+  position: absolute;
+  top: 3vh;
+  overflow: hidden;
+  padding: 0px 5px;
+  padding-top: 5px;
+}
+
+.search-container__results{
+  overflow-y: auto;
+  height: calc(30vh - 1.5em - 10px);
+
+  width: 100%;
+}
+
+.search__button{
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.test__element{
+  height: 100%;
+  width: auto;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-

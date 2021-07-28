@@ -13,6 +13,8 @@ import EditReview from './components/BusinessPage/EditReview'
 import AddReview from './components/BusinessPage/AddReview'
 import SearchResults from './components/Splash/SearchResults'
 import { authenticate } from "./store/session";
+import './index.css'
+
 import EditBusiness from "./components/BusinessPage/EditBusiness";
 import  AddBusiness from "./components/BusinessPage/AddBusiness";
 function App() {
@@ -21,7 +23,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();

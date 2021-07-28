@@ -11,7 +11,7 @@ const DemoLogin = () => {
     await dispatch(login('demo@aa.io', 'password'));
   };
 
-  return <button onClick={onDemoLogin}>Demo Login</button>;
+  return <button className='demo__button' onClick={onDemoLogin}>Demo Login</button>;
 };
 
 export default DemoLogin;

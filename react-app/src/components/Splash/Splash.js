@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getBusinesses } from '../../store/business'
 import SearchResults from "./SearchResults";
+import SearchIcon from '@material-ui/icons/Search';
 
 function Splash() {
 
@@ -42,11 +43,11 @@ function Splash() {
     }
 
     )
-    temp = temp.filter((el, idx, self) =>
-      idx === self.findIndex((t) => (
-        t['id'] === el["id"] && t['business_name'] === el['business_name']
-      ))
-    ) //This code is based on an answer from user Eydrian on Github (https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects), check to see if it's ok to use it before putting it in the final product.
+    // temp = temp.filter((el, idx, self) =>
+    //   idx === self.findIndex((t) => (
+    //     t['id'] === el["id"] && t['business_name'] === el['business_name']
+    //   ))
+    // ) //This code is based on an answer from user Eydrian on Github (https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects), check to see if it's ok to use it before putting it in the final product.
     setSearchResults([...temp])
 
     // setSearchResults(businesses.filter(el => el.includes(search)));
@@ -65,23 +66,27 @@ function Splash() {
 
   {
     return businesses ? (
-      <div className='flex justify-center'>
-        <div className='absolute top-1/4'>
-          <form onSubmit={handleSubmit} className='flex justify-between rounded-full shadow-xl w-1000 h-7'>
-            <input className='w-full h-7 rounded p-2'
-              name="search"
-              type="text"
-              placeholder="search"
-              value={search}
-              onChange={handleChange}
-            />
-            <button type='submit' className="material-icons">search</button>
-          </form>
-          <div className='flex flex-col justify center'>{searchResults.map((business, idx) =><div key={idx} className='flex flex-col mt-5'> <SearchResults business={business}/></div>)}</div>
+      <div className='main-splash__container'>
+        <div className='main-splash__header'>Help</div>
+        <div className='main-splash__main'>
+          <h4 className='main-splash__help-text'>Search for businesses by name, category, or services rendered</h4>
+          <div className='search-container'>
+            <form className='main-splash__content' onSubmit={handleSubmit}>
+              <input
+                className='main-splash__searchbar'
+                name="search"
+                type="text"
+                placeholder="Plumbing, Electrician, Construction, Floorcare, etc."
+                value={search}
+                onChange={handleChange}
+              />
+              <button className='search__button' type='submit'>{<SearchIcon classes={{ root: "test__element", }} />}</button>
+            </form>
+            <div className='search-container__results'>
+              {searchResults.map((business, idx) => <div className='search' key={idx}> <SearchResults business={business} /> </div>)}
+            </div>
+          </div>
         </div>
-
-
-
       </div>
     ) : (<div>Loading...</div>)
   }
