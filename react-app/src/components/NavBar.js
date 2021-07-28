@@ -25,8 +25,6 @@ const NavBar = () => {
             Sign Up
           </NavLink>
         </li>
-
-
         {sessionUser ? (<li className='navbar__item'><LogoutButton /> </li>) :
           (<>
             <li className='navbar__item'>

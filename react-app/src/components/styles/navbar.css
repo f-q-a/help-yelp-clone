@@ -1,9 +1,10 @@
 .navbar{
     display: flex;
-    position: sticky;
+    position: fixed;
+    width: 100vw;
     flex-direction: column;
     align-items: flex-end;
-    background-color: red;
+    background-color: #EF4444;
   }
   .navbar__item, .button__logout{
       font-weight: bold;
@@ -19,15 +20,24 @@
   .navbar__item a{
     text-decoration: none;
     color: white;
-    padding: 0.4rem;
   }
 
-  .navbar__item a:hover{
+
+  .navbar__item:hover{
     text-decoration: none;
-    color: red;
     background-color: white;
   }
 
+  .navbar__item:hover > *{
+    color: #EF4444;
+  }
   .button__logout{
       color: white;
+  }
+
+  .navbar > .navbar__item-container > .navbar__item{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
   }

@@ -67,20 +67,26 @@ function Splash() {
   {
     return businesses ? (
       <div className='main-splash__container'>
-        <form className='main-splash__content' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="search" className='main-business__label'>Search</label>
-            <input
-              name="search"
-              type="text"
-              placeholder="search"
-              value={search}
-              onChange={handleChange}
-            />
-            <button className='search__button' type='submit'>{<SearchIcon fontSize='small'/>}</button>
+        <div className='main-splash__header'>Help</div>
+        <div className='main-splash__main'>
+          <h4 className='main-splash__help-text'>Search for businesses by name, category, or services rendered</h4>
+          <div className='search-container'>
+            <form className='main-splash__content' onSubmit={handleSubmit}>
+              <input
+                className='main-splash__searchbar'
+                name="search"
+                type="text"
+                placeholder="Plumbing, Electrician, Construction, Floorcare, etc."
+                value={search}
+                onChange={handleChange}
+              />
+              <button className='search__button' type='submit'>{<SearchIcon classes={{ root: "test__element", }} />}</button>
+            </form>
+            <div className='search-container__results'>
+              {searchResults.map((business, idx) => <div className='search' key={idx}> <SearchResults business={business} /> </div>)}
+            </div>
           </div>
-        </form>
-        {searchResults.map((business, idx) => <div key={idx}> <SearchResults business={business} /> </div>)}
+        </div>
       </div>
     ) : (<div>Loading...</div>)
   }

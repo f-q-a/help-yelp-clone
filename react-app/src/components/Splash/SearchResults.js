@@ -12,10 +12,11 @@ function SearchResults(props) {
         console.log(el)
     })
     return (
-        <div>
-            <div><Link to={`/business/${Number(business.id)}`}>{String(business['business_name'])}</Link> <Rating size='small' name="half-rating-read" defaultValue={business['avg_rating']} precision={0.1} readOnly /></div>
-            <div>{business.address},  {business.city}, {business.state}, {business.zipcode} </div>
-            <div>{business.phone_number}</div>
+        <div className='search__search-result'>
+            <div className='search__business-title'><Link to={`/business/${Number(business.id)}`}>{String(business['business_name'])}</Link></div>
+            <div><Rating size='small' name="half-rating-read" defaultValue={business['avg_rating']} precision={0.1} readOnly /></div>
+            <div className='search__business-address'>{business.address},  {business.city}, {business.state}, {business.zipcode} </div>
+            <div className='search__business-phone'>{business.phone_number}</div>
         </div>
     );
 
