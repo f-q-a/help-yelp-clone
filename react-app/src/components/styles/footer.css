@@ -8,3 +8,20 @@
     justify-content: center;
     align-items: center;
 }
+
+.image{
+    opacity: .5;
+    font-size: 32px;
+}
+
+.image:hover{
+    opacity: 1;
+}
+
+.devicon-github-original{
+    color: white;
+}
+
+.devicon-linkedin-plain{
+    color: white;
+}
