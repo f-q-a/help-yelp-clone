@@ -1,15 +1,51 @@
 .main{
     display: flex;
-    height: 60vh;
+    height: 80vh;
     width: 100vw;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: space-between;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
 }
 
 .header{
     display: flex;
+    height: 10vh;
+    font-size: 4vh;
     flex-direction: column;
-    justify-content: flex-start;
+    align-self: center;
+}
+
+.new-business__input{
+    margin-left: 2vw;
+    border: 0.1vw solid black;
+    border-radius: 4px;
+}
+
+form{
+    height: 30vh;
+}
+
+.new-business__form{
+    height: 50vh;
+    gap: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
+}
+
+.new-business__button-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-business__button{
+    margin-top: 0.4vw;
+    padding: 0 0.4vw;
+    border: 0.1vw solid black;
+    border-radius: 4px;
 }
