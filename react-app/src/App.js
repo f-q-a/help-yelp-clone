@@ -12,6 +12,7 @@ import BusinessPage from "./components/BusinessPage/BusinessPage";
 import EditReview from './components/BusinessPage/EditReview'
 import AddReview from './components/BusinessPage/AddReview'
 import SearchResults from './components/Splash/SearchResults'
+import Footer from './components/Footer';
 import { authenticate } from "./store/session";
 import './index.css'
 
@@ -71,6 +72,7 @@ function App() {
           <Splash/>
         </Route>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }
