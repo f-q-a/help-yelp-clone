@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './styles/navbar.css';
 import DemoLogin from './auth/DemoLogin';
+import AddBusiness from './BusinessPage/AddBusiness';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user)
@@ -20,7 +21,17 @@ const NavBar = () => {
             Users
           </NavLink>
         </li>
-        {sessionUser ? (<li className='navbar__item'><LogoutButton /> </li>) :
+        {sessionUser ? (
+          <>
+            <li className='navbar__item'>
+              <NavLink className='' to='/new-business' exact={true} activeClassName='active'>
+                Add Business
+              </NavLink>
+            </li>
+            <li className='navbar__item'><LogoutButton /> </li>
+          </>
+        )
+          :
           (<>
             <li className='navbar__item'>
               <NavLink className='' to="/sign-up" exact={true} activeClassName="active">
