@@ -1,0 +1,15 @@
+.main{
+    display: flex;
+    height: 60vh;
+    width: 100vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: space-between;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
