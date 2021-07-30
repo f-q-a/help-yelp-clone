@@ -26,6 +26,3 @@ Help is an app for reviewing and finding businesses/contractors/service provider
 ## Reflections
 
 In the future, I would like to flesh the app out a bit more to allow users to customize their profiles and also to use the google maps API to provide a visual representation of where all of the businesses that are returned by the search results are located. As it stands right now, the app's main features are full CRUD functionality on reviews and businesses.
-
-## Author
-### [Felipe Araujo](https://github.com/f-q-a)
