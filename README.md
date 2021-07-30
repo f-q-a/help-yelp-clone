@@ -9,6 +9,9 @@ Help is an app for reviewing and finding businesses/contractors/service provider
 ### Redux
 * The information presented to the user on the frontend is what is retrieved by Redux through thunks that make API calls to the backend server.
 
+### Tailwind CSS
+* Tailwind CSS was 
+
 ## Backend
 ### Flask
 * Flask made implementing the backend routes very straightforward, another reason it was chosen was so that Flask-SQLAlchemy could be used as the ORM for the app.
