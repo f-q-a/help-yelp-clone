@@ -8,6 +8,7 @@
 
 body{
   overflow: hidden;
+  background-image: url('./components/images/scaffolding.png');
 }
 
 .demo__button{
@@ -28,7 +29,7 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('./components/images/scaffolding.png');
+
 }
 
 .main-splash__main{
