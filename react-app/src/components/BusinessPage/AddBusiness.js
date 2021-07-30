@@ -41,94 +41,98 @@ function AddBusiness() {
 
     return (
         <div className='main'>
-            <h2 className='header'>New Business</h2>
             <div className='new-business__container'>
                 <form onSubmit={handleSubmit}>
-                    <div>
-
+                    <div className='new-business__form'>
+                        <div className='header'>New Business</div>
                         <div>
                             <label>
                                 Business Name
-                                <input
+                            </label>
+                            <input
+                                    className='new-business__input'
                                     name="business_name"
                                     type="text"
                                     value={businessName}
                                     onChange={(e) => setBusinessName(e.target.value)}
                                     required
                                 />
-
-                            </label>
                         </div>
                         <div>
                             <label>
                                 Address
-                                <input
+                            </label>
+                            <input
+                                    className='new-business__input'
                                     name="address"
                                     type="text"
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
                                     required
                                 />
-                            </label>
                         </div>
                         <div>
                             <label>
                                 City
-                                <input
+                            </label>
+                            <input
+                                    className='new-business__input'
                                     name="city"
                                     type="text"
                                     value={city}
                                     onChange={(e) => setCity(e.target.value)}
                                     required
                                 />
-                            </label>
                         </div>
                         <div>
                             <label>
                                 State
-                                <input
+                            </label>
+                            <input
+                                    className='new-business__input'
                                     name="state"
                                     type="text"
                                     value={businessState}
                                     onChange={(e) => setBusinessState(e.target.value)}
                                     required
                                 />
-                            </label>
                         </div>
                         <div>
                             <label>
                                 Zipcode
-                                <input
+                            </label>
+                            <input
+                                    className='new-business__input'
                                     name="zipcode"
                                     type="text"
                                     value={zipcode}
                                     onChange={(e) => setZipcode(e.target.value)}
                                     required
                                 />
-                            </label>
                         </div>
                         <div>
                             <label>
                                 Phone Number
-                                <input
+                            </label>
+                            <input
+                                    className='new-business__input'
                                     name="phone_number"
                                     type="text"
                                     value={phoneNumber}
                                     onChange={(e) => setPhoneNumber(e.target.value)}
                                     required
                                 />
-                            </label>
                         </div>
                         <div>
                             <label>
                                 Select Business Category
-                                <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                            </label>
+                            <select className='new-business__input' value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
                                     <option value={1}>Cleaning</option>
                                     <option value={2}>Electrical</option>
                                     <option value={3}>Plumbing</option>
                                     <option value={4}>Carpentry</option>
                                 </select>
-                            </label>
                         </div>
                         {/* <label>
                         List services offered, seperated by commas without spacing:
@@ -138,8 +142,12 @@ function AddBusiness() {
                         required
                     />
                     </label> */}
+                     <div className='new-business__button-container'>
+                        <button className='new-business__button' type="submit">Add Business</button>
                     </div>
-                    <button type="submit">Add Business</button>
+                    </div>
+
+
                 </form>
             </div>
         </div>
