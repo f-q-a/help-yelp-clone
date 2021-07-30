@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
-import '../styles/add-business.css'
+import '../styles/form.css'
 
 
 function AddBusiness() {
@@ -40,17 +40,16 @@ function AddBusiness() {
     }, [dispatch]);
 
     return (
-        <div className='main'>
-            <div className='new-business__container'>
+
+            <div className='form__container'>
                 <form onSubmit={handleSubmit}>
-                    <div className='new-business__form'>
-                        <div className='header'>New Business</div>
-                        <div>
+                    <div className='input__container'>
+                        <h2>New Business</h2>
+                        <div className='form__input'>
                             <label>
                                 Business Name
                             </label>
                             <input
-                                    className='new-business__input'
                                     name="business_name"
                                     type="text"
                                     value={businessName}
@@ -58,12 +57,11 @@ function AddBusiness() {
                                     required
                                 />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Address
                             </label>
                             <input
-                                    className='new-business__input'
                                     name="address"
                                     type="text"
                                     value={address}
@@ -71,12 +69,11 @@ function AddBusiness() {
                                     required
                                 />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 City
                             </label>
                             <input
-                                    className='new-business__input'
                                     name="city"
                                     type="text"
                                     value={city}
@@ -84,12 +81,11 @@ function AddBusiness() {
                                     required
                                 />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 State
                             </label>
                             <input
-                                    className='new-business__input'
                                     name="state"
                                     type="text"
                                     value={businessState}
@@ -97,12 +93,11 @@ function AddBusiness() {
                                     required
                                 />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Zipcode
                             </label>
                             <input
-                                    className='new-business__input'
                                     name="zipcode"
                                     type="text"
                                     value={zipcode}
@@ -110,12 +105,11 @@ function AddBusiness() {
                                     required
                                 />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Phone Number
                             </label>
                             <input
-                                    className='new-business__input'
                                     name="phone_number"
                                     type="text"
                                     value={phoneNumber}
@@ -123,11 +117,11 @@ function AddBusiness() {
                                     required
                                 />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Select Business Category
                             </label>
-                            <select className='new-business__input' value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                            <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
                                     <option value={1}>Cleaning</option>
                                     <option value={2}>Electrical</option>
                                     <option value={3}>Plumbing</option>
@@ -142,15 +136,14 @@ function AddBusiness() {
                         required
                     />
                     </label> */}
-                     <div className='new-business__button-container'>
-                        <button className='new-business__button' type="submit">Add Business</button>
+                     <div className='form__input button__container'>
+                        <button className='business__button' type="submit">Add Business</button>
                     </div>
                     </div>
 
 
                 </form>
             </div>
-        </div>
     );
 }
 

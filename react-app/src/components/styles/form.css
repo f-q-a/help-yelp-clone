@@ -1,0 +1,100 @@
+.form__container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1.5vh;
+    font-weight: bold;
+    color: #1f2937;
+    font-size: 31px;
+}
+
+
+.form__input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1vh 0;
+    font-size: 22px;
+}
+
+.form__input > label{
+    font-weight: bold;
+    color: #ef4444;
+
+}
+
+.business__button{
+    width: 14vw;
+    border: 1px solid #ef4444;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 4px;
+    font-size: 22px;
+    margin: 20px 0;
+    font-weight: bold;
+
+}
+
+button:hover{
+    background-color: white;
+    color: #ef4444;
+}
+
+.button__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.input__container{
+    width: 50vw;
+}
+
+
+@media screen and (max-width: 1212px) {
+    .edit-business__button{
+        width: 13vw;
+        border: 1px solid #ef4444;
+        background-color: #ef4444;
+        color: white;
+        border-radius: 4px;
+        font-size: 18px;
+        margin: 20px 0;
+        font-weight: bold;
+
+    }
+
+    button:hover{
+        background-color: white;
+        color: #ef4444;
+    }
+
+    .button__container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+  }

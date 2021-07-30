@@ -17,7 +17,7 @@ import { authenticate } from "./store/session";
 import './index.css'
 
 import EditBusiness from "./components/BusinessPage/EditBusiness";
-import  AddBusiness from "./components/BusinessPage/AddBusiness";
+import AddBusiness from "./components/BusinessPage/AddBusiness";
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
@@ -34,45 +34,54 @@ function App() {
     return null;
   }
 
+  const myStyle = {
+
+    height: "100%",
+    width: "100%",
+    display: "block"
+  };
+
   return (
     <BrowserRouter>
       <NavBar />
-      <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <Route path='/business/:businessId' exact={true}>
-          <BusinessPage/>
-        </Route>
-        <Route path='/search/:searchTerm'>
-          <SearchResults />
-        </Route>
-        <ProtectedRoute path='/business/:businessId/:userId/new-review' exact={true}>
-          <AddReview/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/business/:businessId/reviews/:userId/edit' exact={true}>
-          <EditReview/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/business/:businessId/:userId/edit-business' exact={true}>
-          <EditBusiness/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/new-business' exact={true}>
-          <AddBusiness/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users" exact={true}>
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true}>
-          <User />
-        </ProtectedRoute>
-        <Route path="/" exact={true} >
-          <Splash/>
-        </Route>
-      </Switch>
-      <Footer/>
+      <div className='main__container' style={myStyle}>
+        <Switch>
+          <Route path="/login" exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
+          </Route>
+          <Route path='/business/:businessId' exact={true}>
+            <BusinessPage />
+          </Route>
+          <Route path='/search/:searchTerm'>
+            <SearchResults />
+          </Route>
+          <ProtectedRoute path='/business/:businessId/:userId/new-review' exact={true}>
+            <AddReview />
+          </ProtectedRoute>
+          <ProtectedRoute path='/business/:businessId/reviews/:userId/edit' exact={true}>
+            <EditReview />
+          </ProtectedRoute>
+          <ProtectedRoute path='/business/:businessId/:userId/edit-business' exact={true}>
+            <EditBusiness />
+          </ProtectedRoute>
+          <ProtectedRoute path='/new-business' exact={true}>
+            <AddBusiness />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users" exact={true}>
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/:userId" exact={true}>
+            <User />
+          </ProtectedRoute>
+          <Route path="/" exact={true} >
+            <Splash />
+          </Route>
+        </Switch>
+      </div>
+      <Footer />
     </BrowserRouter>
   );
 }

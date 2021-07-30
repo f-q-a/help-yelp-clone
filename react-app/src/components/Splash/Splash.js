@@ -67,7 +67,7 @@ function Splash() {
   {
     return businesses ? (
       <div className='main-splash__container'>
-        <div className='main-splash__header'>Help</div>
+        <div className='main-splash__header'>help</div>
         <div className='main-splash__main'>
           <h4 className='main-splash__help-text'>Search for businesses by name, category, or services rendered</h4>
           <div className='search-container'>
