@@ -11,7 +11,7 @@
 .header{
     display: flex;
     height: 10vh;
-    font-size: 4vh;
+    font-size: 40px;
     flex-direction: column;
     align-self: center;
 }
@@ -20,6 +20,11 @@
     margin-left: 2vw;
     border: 0.1vw solid black;
     border-radius: 4px;
+}
+
+.new-business__input:focus{
+    outline: none;
+
 }
 
 form{
