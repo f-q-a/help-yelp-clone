@@ -32,7 +32,7 @@ function EditBusiness() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const businessUpdate = {'id': businessId, 'business_name': businessName, 'address': address, 'city': city, 'state': businessState, 'zipcode': zipcode, 'category_id': categoryId, 'phone_number': phoneNumber, 'business_img': '', 'services': services}
+        const businessUpdate = { 'id': businessId, 'business_name': businessName, 'address': address, 'city': city, 'state': businessState, 'zipcode': zipcode, 'category_id': categoryId, 'phone_number': phoneNumber, 'business_img': '', 'services': services }
         await dispatch(businessActions.editBusiness(businessUpdate))
         history.push(`/business/${businessId}`)
 
@@ -62,12 +62,14 @@ function EditBusiness() {
         );
     } else {
         return (
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <h2>Edit Business Details</h2>
+            <div className='form__container'>
+                <form onSubmit={handleSubmit}>
                     <div>
-                        <label>
-                            Business Name
+                        <h2>Edit Business Details</h2>
+                        <div>
+                            <label>
+                                Business Name
+                            </label>
                             <input
                                 name="business_name"
                                 type="text"
@@ -76,12 +78,11 @@ function EditBusiness() {
                                 onChange={(e) => setBusinessName(e.target.value)}
                                 required
                             />
-
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Edit Address
+                        </div>
+                        <div>
+                            <label>
+                                Edit Address
+                            </label>
                             <input
                                 name="address"
                                 type="text"
@@ -90,11 +91,11 @@ function EditBusiness() {
                                 onChange={(e) => setAddress(e.target.value)}
                                 required
                             />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Edit City
+                        </div>
+                        <div>
+                            <label>
+                                Edit City
+                            </label>
                             <input
                                 name="city"
                                 type="text"
@@ -103,11 +104,11 @@ function EditBusiness() {
                                 onChange={(e) => setCity(e.target.value)}
                                 required
                             />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Edit State
+                        </div>
+                        <div>
+                            <label>
+                                Edit State
+                            </label>
                             <input
                                 name="state"
                                 type="text"
@@ -116,11 +117,11 @@ function EditBusiness() {
                                 onChange={(e) => setBusinessState(e.target.value)}
                                 required
                             />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Edit Zipcode
+                        </div>
+                        <div>
+                            <label>
+                                Edit Zipcode
+                            </label>
                             <input
                                 name="zipcode"
                                 type="text"
@@ -129,11 +130,11 @@ function EditBusiness() {
                                 onChange={(e) => setZipcode(e.target.value)}
                                 required
                             />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Edit Phone Number
+                        </div>
+                        <div>
+                            <label>
+                                Edit Phone Number
+                            </label>
                             <input
                                 name="phone_number"
                                 type="text"
@@ -142,20 +143,19 @@ function EditBusiness() {
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
                             />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Select Business Category
-                        <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-                        <option value={1}>Cleaning</option>
-                        <option value={2}>Electrical</option>
-                        <option value={3}>Plumbing</option>
-                        <option value={4}>Carpentry</option>
-                        </select>
-                        </label>
-                    </div>
-                    {/* <label>
+                        </div>
+                        <div>
+                            <label>
+                                Select Business Category
+                            </label>
+                            <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                                <option value={1}>Cleaning</option>
+                                <option value={2}>Electrical</option>
+                                <option value={3}>Plumbing</option>
+                                <option value={4}>Carpentry</option>
+                            </select>
+                        </div>
+                        {/* <label>
                         List services offered, seperated by commas without spacing:
                         <textarea
                         defaultValue={Object.values(business.services).map((el) => el.desc)}
@@ -163,10 +163,11 @@ function EditBusiness() {
                         required
                     />
                     </label> */}
-                </div>
-                <button type="submit">Submit Changes</button>
-                <button onClick={handleDelete}>Delete Business</button>
-            </form >
+                        <button type="submit">Submit Changes</button>
+                        <button onClick={handleDelete}>Delete Business</button>
+                    </div>
+                </form >
+            </div>
 
         );
     }
