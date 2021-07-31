@@ -27,6 +27,7 @@ function Splash() {
 
         if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
+          continue;
 
         }
 
@@ -37,6 +38,7 @@ function Splash() {
         console.log(el['services'][i])
         if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
           temp.push({ ...el })
+          
         }
       }
 
@@ -67,7 +69,7 @@ function Splash() {
   {
     return businesses ? (
       <div className='main-splash__container'>
-        <div className='main-splash__header'>Help</div>
+        <div className='main-splash__header'>help</div>
         <div className='main-splash__main'>
           <h4 className='main-splash__help-text'>Search for businesses by name, category, or services rendered</h4>
           <div className='search-container'>

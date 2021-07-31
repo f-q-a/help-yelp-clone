@@ -6,6 +6,11 @@
     margin: 0;
 }
 
+html, body{
+  height: 100%;
+  margin: 0;
+}
+
 body{
   overflow: hidden;
   background-image: url('./components/images/scaffolding.png');
@@ -19,6 +24,9 @@ body{
 .main-splash__header{
   font-size: 12vh;
   position: absolute;
+  font-family: "Helvetica Rounded";
+  font-weight: bold;
+  font-style: italic;
   top: 26vh;
 }
 

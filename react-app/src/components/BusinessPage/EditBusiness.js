@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
+import '../styles/form.css'
 
 function EditBusiness() {
     const { businessId, userId } = useParams();
@@ -64,9 +65,9 @@ function EditBusiness() {
         return (
             <div className='form__container'>
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    <div className='input__container'>
                         <h2>Edit Business Details</h2>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Business Name
                             </label>
@@ -79,7 +80,7 @@ function EditBusiness() {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Edit Address
                             </label>
@@ -92,7 +93,7 @@ function EditBusiness() {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Edit City
                             </label>
@@ -105,7 +106,7 @@ function EditBusiness() {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Edit State
                             </label>
@@ -118,7 +119,7 @@ function EditBusiness() {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Edit Zipcode
                             </label>
@@ -131,7 +132,7 @@ function EditBusiness() {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Edit Phone Number
                             </label>
@@ -144,7 +145,7 @@ function EditBusiness() {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='form__input'>
                             <label>
                                 Select Business Category
                             </label>
@@ -163,8 +164,10 @@ function EditBusiness() {
                         required
                     />
                     </label> */}
-                        <button type="submit">Submit Changes</button>
-                        <button onClick={handleDelete}>Delete Business</button>
+                        <div className='form__input button__container'>
+                            <button className='form__button' type="submit">Submit Changes</button>
+                            <button className='form__button' onClick={handleDelete}>Delete Business</button>
+                        </div>
                     </div>
                 </form >
             </div>
