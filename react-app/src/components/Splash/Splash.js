@@ -27,6 +27,7 @@ function Splash() {
 
         if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
+          continue;
 
         }
 
@@ -37,6 +38,7 @@ function Splash() {
         console.log(el['services'][i])
         if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
           temp.push({ ...el })
+          
         }
       }
 

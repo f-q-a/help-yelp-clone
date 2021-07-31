@@ -15,7 +15,6 @@ import SearchResults from './components/Splash/SearchResults'
 import Footer from './components/Footer';
 import { authenticate } from "./store/session";
 import './index.css'
-
 import EditBusiness from "./components/BusinessPage/EditBusiness";
 import AddBusiness from "./components/BusinessPage/AddBusiness";
 function App() {

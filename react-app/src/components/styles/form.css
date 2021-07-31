@@ -42,7 +42,7 @@ h2{
 
 }
 
-.business__button{
+.form__button{
     width: 14vw;
     border: 1px solid #ef4444;
     background-color: #ef4444;
@@ -73,7 +73,7 @@ button:hover{
 
 
 @media screen and (max-width: 1212px) {
-    .edit-business__button{
+    .form__button{
         width: 13vw;
         border: 1px solid #ef4444;
         background-color: #ef4444;

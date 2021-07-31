@@ -165,8 +165,8 @@ function EditBusiness() {
                     />
                     </label> */}
                         <div className='form__input button__container'>
-                            <button className='business__button' type="submit">Submit Changes</button>
-                            <button className='business__button' onClick={handleDelete}>Delete Business</button>
+                            <button className='form__button' type="submit">Submit Changes</button>
+                            <button className='form__button' onClick={handleDelete}>Delete Business</button>
                         </div>
                     </div>
                 </form >
