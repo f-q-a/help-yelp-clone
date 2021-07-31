@@ -10,6 +10,7 @@ function Splash() {
   const [search, setSearch] = useState('');
   const [businesses, setBusinesses] = useState([])
   const [searchResults, setSearchResults] = useState([])
+
   const handleSubmit = (e) => {
 
     e.preventDefault();
@@ -18,6 +19,7 @@ function Splash() {
       let tempArr = [...Object.values(el)];
       let serviceArr = [...Object.values(el['services'])]
       let category = el['category'];
+      let inserted = false;
       tempArr = tempArr.filter(el => typeof (el) === "string");
 
       for (let i = 0; i < tempArr.length; i++) {
@@ -27,20 +29,23 @@ function Splash() {
 
         if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
-          continue;
+          inserted = true;
+          break;
 
         }
 
 
       }
+      if(!inserted){
+        for (let i = 0; i < el['services'].length; i++) {
+          console.log(el['services'][i])
+          if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
+            temp.push({ ...el })
 
-      for (let i = 0; i < el['services'].length; i++) {
-        console.log(el['services'][i])
-        if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
-          temp.push({ ...el })
-          
+          }
         }
       }
+
 
     }
 
@@ -53,6 +58,10 @@ function Splash() {
     setSearchResults([...temp])
 
     // setSearchResults(businesses.filter(el => el.includes(search)));
+  }
+
+  if(businesses){
+
   }
   const handleChange = (e) => {
     setSearch(e.target.value)
