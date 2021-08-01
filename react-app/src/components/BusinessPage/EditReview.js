@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import '../styles/reviews.css'
 import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
+import '../styles/form.css'
 
 function EditReview(props) {
     const { review, setShowForm } = props;
@@ -54,10 +55,10 @@ function EditReview(props) {
         );
     } else {
         return (
-            <div className='edit-form__container'>
+            <div className='form__container'>
                 <form onSubmit={handleSubmit}>
-                    <div className='edit-input__container'>
-                        <div className='edit-form__input'>
+                    <div className='input__container'>
+                        <div className='form__input'>
                             <label>
                                 Rating
                             </label>
@@ -69,7 +70,7 @@ function EditReview(props) {
                                 <option value={5}>5</option>
                             </select>
                         </div>
-                        <div className='edit-form__input'>
+                        <div className='form__input'>
                             <label>
                                 Update Review
                             </label>
@@ -79,9 +80,10 @@ function EditReview(props) {
                                 required
                             />
                         </div>
-                        <div className='edit-button__container'>
-                            <button className='edit-form__button' type="submit">Submit Changes</button>
-                            <button className='edit-form__button' onClick={handleDelete}>Delete Review</button>
+                        <div className='button__container'>
+                            <button className='form__button' type="submit">Save</button>
+                            <button className='form__button' onClick={setShowForm(false)}>Cancel</button>
+                            <button className='form__button' onClick={handleDelete}>Delete Review</button>
                         </div>
                     </div>
 

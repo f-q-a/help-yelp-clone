@@ -24,16 +24,34 @@ function BusinessPage() {
         e.preventDefault();
         history.push({pathname: `/business/${businessId}/${sessionUser.id}/edit-business`, state: {business: {...business.businesses[to_str]}}});
     }
+    const showAddReview = (e) => {
+        e.preventDefault();
+        history.push({pathname: `/business/${businessId}/${sessionUser.id}/add-review`, state: {business: {...business.businesses[to_str]}}});
+    }
     const [users, setUsers] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
     const [blockAdd, setBlockAdd] = useState(false);
-    const [showForm, setShowForm] = useState(false)
+    const [showForm, setShowForm] = useState(false);
+    const [showAddForm, setShowAddForm] = useState(false);
     const reviewExists = sessionUser && reviews.some((el) => {
         return el.user_id === sessionUser.id;
     })
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowForm(true);
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        let toDelete = window.confirm('Are you sure you would like to delete this review?')
+        if(toDelete){
+            dispatch(reviewActions.deleteReview(businessId, sessionUser.id, reviews[`${sessionUser.id}-${businessId}`]))
+            history.push(`/business/${businessId}`)
+        }else{
+
+        }
+
+
     }
     useEffect(() => {
         console.log('IS session user home?', sessionUser)
@@ -73,9 +91,9 @@ function BusinessPage() {
                                 return (<li key={el.id}>{el.desc} </li>);
                             })}
                         </ul>
-                        <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<form onSubmit={handleEditBusiness}><div className='button__container'><button className='form__button' type='submit'>Edit Business</button></div></form>))} </div>
+                        <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<form onSubmit={handleEditBusiness}><div className='business-button__container'><button className='business-form__button' type='submit'>Edit Business</button></div></form>))} </div>
                     </div>
-                    <div className=''>Reviews</div>
+                    <div className='business__reviews-header'>Reviews</div>
                     <table className='reviews__container'>
                         {Object.values(reviews).map((review, index) => {
                             if (sessionUser && sessionUser.id === review.user_id) {
@@ -85,11 +103,12 @@ function BusinessPage() {
                                     </tr>)
                                 }
                                 return (<tr className='review__container'>
-                                    <td>
+                                    <td className='review-edit'>
                                         <Review key={index} review={review} setShowForm={setShowForm} />
                                         <form className='edit-form' onSubmit={handleSubmit}>
                                             <div className='edit-button__container'>
                                                 <button type='submit' className='edit-form__button' >Edit</button>
+                                                <button className='edit-form__button' onClick={handleDelete}>Delete Review</button>
                                             </div>
                                         </form>
                                     </td>
@@ -105,7 +124,14 @@ function BusinessPage() {
                         })}
                     </table>
 
-                    {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/new-review`}>Add New Review</Link>{' '}</div>))}
+                    {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (
+                    <div className='business-form__container'>
+                        <form className='edit-form' onSubmit={handleSubmit}>
+                                            <div className='business-button__container'>
+                                                <button className='business-form__button' onClick={showAddReview}>Add New Review</button>
+                                            </div>
+                                        </form>
+                        </div>))}
 
 
 

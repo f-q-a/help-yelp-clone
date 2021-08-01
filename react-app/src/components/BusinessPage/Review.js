@@ -14,10 +14,10 @@ function Review(props) {
   const [users, setUsers] = useState([]);
   console.log('reviews ---------->', reviews);
   return (
-<td>
+<td className='review-content__container'>
       <td className='review-content'>
-        {props.review.user.username} {' '}
-        {[...Array(props.review.rating)].map((el, idx) => <StarIcon key={idx}></StarIcon>)} { }
+        <div className='review-content__field'>{props.review.user.username} {' '}</div>
+        <div className='review-content__field'>{[...Array(props.review.rating)].map((el, idx) => <StarIcon key={idx}></StarIcon>)} { }</div>
       </td>
       <tr className='review-content'>
         <td>

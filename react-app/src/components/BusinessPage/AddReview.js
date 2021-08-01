@@ -7,10 +7,10 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
-
+import '../styles/form.css'
 function AddReview() {
     const dispatch = useDispatch();
-    const {businessId, userId} = useParams();
+    const { businessId, userId } = useParams();
     const history = useHistory();
     const [body, setBody] = useState("");
     const sessionUser = useSelector(state => state.session.user);
@@ -23,34 +23,36 @@ function AddReview() {
 
     }
 
-        return (
-            <form onSubmit={handleSubmit}>
+    return (
+        <form onSubmit={handleSubmit}>
             <div>
-                <label>
-                    Rating
+                <div>
+                    <label>
+                        Rating
+                    </label>
                     <select value={rating} onChange={e => setRating(e.target.value)}>
-                       <option value={1}>1</option>
-                       <option value={2}>2</option>
-                       <option value={3}>3</option>
-                       <option value={4}>4</option>
-                       <option value={5}>5</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
                     </select>
-                </label>
-
+                </div>
+                <div>
                 <label>
                     Create Review
-                    <textarea
-                        defaultValue={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        required
-                    />
                 </label>
-
+                <textarea
+                    defaultValue={body}
+                    onChange={(e) => setBody(e.target.value)}
+                    required
+                />
+                </div>
             </div>
             <button type="submit">Submit Review</button>
         </form>
 
-        );
+    );
 }
 
 export default AddReview
