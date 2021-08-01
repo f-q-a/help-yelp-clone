@@ -36,7 +36,7 @@ function Splash() {
 
 
       }
-      if(!inserted){
+      if (!inserted) {
         for (let i = 0; i < el['services'].length; i++) {
           console.log(el['services'][i])
           if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
@@ -60,7 +60,7 @@ function Splash() {
     // setSearchResults(businesses.filter(el => el.includes(search)));
   }
 
-  if(businesses){
+  if (businesses) {
 
   }
   const handleChange = (e) => {
