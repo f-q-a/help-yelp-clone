@@ -5,11 +5,12 @@ import * as reviewActions from '../../store/review'
 import { useDispatch, useSelector } from "react-redux";
 import Review from './Review'
 import { Rating } from '@material-ui/lab';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import EditReview from './EditReview';
 import '../styles/reviews.css'
 
 function BusinessPage() {
+    const history = useHistory();
     const { businessId, userId } = useParams();
     const dispatch = useDispatch();
     const business = useSelector(state => {
@@ -19,6 +20,10 @@ function BusinessPage() {
 
 
     const reviews = useSelector(state => Object.values(state.review.reviews))
+    const handleEditBusiness = (e) => {
+        e.preventDefault();
+        history.push({pathname: `/business/${businessId}/${sessionUser.id}/edit-business`, state: {business: {...business.businesses[to_str]}}});
+    }
     const [users, setUsers] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
     const [blockAdd, setBlockAdd] = useState(false);
@@ -54,20 +59,22 @@ function BusinessPage() {
         <div className='business__container'>
             {business.businesses[to_str] ? (
                 <div>
-                    <div>{business.businesses[to_str].business_name}</div>
-                    <div>{business.businesses[to_str].category.name}</div>
-                    Average Rating: <Rating name="half-rating-read" value={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
-                    <div>
-                        {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
+                    <div className='business-container__business'>
+                        <div>{business.businesses[to_str].business_name}</div>
+                        <div>{business.businesses[to_str].category.name}</div>
+                        Average Rating: <Rating name="half-rating-read" value={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
+                        <div>
+                            {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
+                        </div>
+                        <div>{business.businesses[to_str].phone_number}</div>
+                        <h3>Services Offered</h3>
+                        <ul>
+                            {Object.values(business.businesses[to_str].services).map((el) => {
+                                return (<li key={el.id}>{el.desc} </li>);
+                            })}
+                        </ul>
+                        <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<form onSubmit={handleEditBusiness}><div className='button__container'><button className='form__button' type='submit'>Edit Business</button></div></form>))} </div>
                     </div>
-                    <div>{business.businesses[to_str].phone_number}</div>
-                    <h3>Services Offered</h3>
-                    <ul>
-                        {Object.values(business.businesses[to_str].services).map((el) => {
-                            return (<li key={el.id}>{el.desc} </li>);
-                        })}
-                    </ul>
-                    <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/edit-business`}>Edit Business</Link>{' '}</div>))} </div>
                     <div className=''>Reviews</div>
                     <table className='reviews__container'>
                         {Object.values(reviews).map((review, index) => {

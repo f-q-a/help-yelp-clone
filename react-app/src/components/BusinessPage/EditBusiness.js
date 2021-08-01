@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useParams } from "react-router";
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
 import '../styles/form.css'
@@ -12,9 +12,9 @@ function EditBusiness() {
     const { businessId, userId } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
-
+    const loc = useLocation();
     const businesses = useSelector(state => state.business.businesses)
-    const business = businesses[businessId]
+    const business = loc.state.business;
     const [categoryId, setCategoryId] = useState(0);
     const [address, setAddress] = useState('');
     const [businessState, setBusinessState] = useState('');
