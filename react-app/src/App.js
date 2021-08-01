@@ -35,7 +35,7 @@ function App() {
 
   const myStyle = {
 
-    height: "100%",
+    height: "89vh",
     width: "100%",
     display: "block"
   };
