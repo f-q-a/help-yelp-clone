@@ -13,25 +13,19 @@ function Review(props) {
   const sessionUser = useSelector(state => state.session.user);
   const [users, setUsers] = useState([]);
   console.log('reviews ---------->', reviews);
-
-  const myStyle = {
-    boxSizing: "border-box",
-    display: "inline",
-    margin: "1em",
-
-
-  }
   return (
-    <div>
-      <div>
+<td>
+      <td className='review-content'>
         {props.review.user.username} {' '}
         {[...Array(props.review.rating)].map((el, idx) => <StarIcon key={idx}></StarIcon>)} { }
-      </div>
-      <div>
-        {props.review.body} {' '}
-      </div>
+      </td>
+      <tr className='review-content'>
+        <td>
+          <tr>{props.review.body} {' '}</tr>
+        </td>
+      </tr>
+    </td>
 
-    </div>
 
   );
 }

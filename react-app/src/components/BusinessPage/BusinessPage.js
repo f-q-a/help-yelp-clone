@@ -7,6 +7,8 @@ import Review from './Review'
 import { Rating } from '@material-ui/lab';
 import { Link, useHistory } from 'react-router-dom';
 import EditReview from './EditReview';
+import '../styles/reviews.css'
+
 function BusinessPage() {
     const { businessId, userId } = useParams();
     const dispatch = useDispatch();
@@ -49,16 +51,16 @@ function BusinessPage() {
 
 
     return (
-        <div>
+        <div className='business__container'>
             {business.businesses[to_str] ? (
                 <div>
                     <div>{business.businesses[to_str].business_name}</div>
                     <div>{business.businesses[to_str].category.name}</div>
                     Average Rating: <Rating name="half-rating-read" value={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
                     <div>
-
                         {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
                     </div>
+                    <div>{business.businesses[to_str].phone_number}</div>
                     <h3>Services Offered</h3>
                     <ul>
                         {Object.values(business.businesses[to_str].services).map((el) => {
@@ -67,32 +69,34 @@ function BusinessPage() {
                     </ul>
                     <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/edit-business`}>Edit Business</Link>{' '}</div>))} </div>
                     <div className=''>Reviews</div>
-                    <div className=''>
+                    <table className='reviews__container'>
                         {Object.values(reviews).map((review, index) => {
-                            if (sessionUser.id === review.user_id) {
-                                if(showForm){
-                                    return (<div>
+                            if (sessionUser && sessionUser.id === review.user_id) {
+                                if (showForm) {
+                                    return (<tr className='review__container'>
                                         <EditReview review={review} setShowForm={setShowForm} />
-                                    </div>)
+                                    </tr>)
                                 }
-                                return (<div>
-                                    <Review key={index} review={review} setShowForm={setShowForm}/>
-                                    <form onSubmit={handleSubmit}>
-                                        <div className='button__container'>
-                                            <button type='submit' className='form__button' >Edit</button>
-                                        </div>
-                                    </form>
-                                </div>)
+                                return (<tr className='review__container'>
+                                    <td>
+                                        <Review key={index} review={review} setShowForm={setShowForm} />
+                                        <form className='edit-form' onSubmit={handleSubmit}>
+                                            <div className='edit-button__container'>
+                                                <button type='submit' className='edit-form__button' >Edit</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>)
                             } else {
                                 return (
-                                    <div>
+                                    <tr className='review__container'>
                                         <Review key={index} review={review} />
-                                    </div>
+                                    </tr>
                                 )
                             }
 
                         })}
-                    </div>
+                    </table>
 
                     {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (<div><Link to={`/business/${businessId}/${sessionUser.id}/new-review`}>Add New Review</Link>{' '}</div>))}
 
