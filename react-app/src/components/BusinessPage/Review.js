@@ -13,7 +13,7 @@ function Review(props) {
   const sessionUser = useSelector(state => state.session.user);
   const [users, setUsers] = useState([]);
   console.log('reviews ---------->', reviews);
-  
+
   const myStyle = {
     boxSizing: "border-box",
     display: "inline",
@@ -29,12 +29,6 @@ function Review(props) {
       </div>
       <div>
         {props.review.body} {' '}
-        {sessionUser && sessionUser.id === props.review.user_id ?
-        (<div style={myStyle}>
-          <Link to={`/business/${props.review.business_id}/reviews/${props.review.user_id}/edit`} >Edit</Link>{' '}
-        </div>) :
-        (<div></div>)
-      }
       </div>
 
     </div>
