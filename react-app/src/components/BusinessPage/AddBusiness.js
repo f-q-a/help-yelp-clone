@@ -137,7 +137,7 @@ function AddBusiness() {
                     />
                     </label> */}
                      <div className='form__input button__container'>
-                        <button className='business__button' type="submit">Add Business</button>
+                        <button className='form__button' type="submit">Add Business</button>
                     </div>
                     </div>
 

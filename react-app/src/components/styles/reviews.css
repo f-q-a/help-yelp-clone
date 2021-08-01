@@ -7,6 +7,77 @@
     align-items: center;
 }
 
+.business-button__container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.business-form__button{
+    display: block;
+    width: 50%;
+    border: 1px solid #ef4444;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 4px;
+    font-size: 16.5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+
+.edit-button__container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-form__button{
+    display: block;
+    width: 50%;
+    border: 1px solid #ef4444;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 4px;
+    font-size: 16.5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
 .edit-form{
-    padding: 0;
+    display: inline-block;
+}
+.review-content__container{
+    display: inline-block;
+    padding: 2px 16px;
+}
+.review-content__field{
+    padding: 2px;
+}
+.business__reviews-header{
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    color: #1f2937;
+}
+.review-edit{
+    display: flex;
+    flex-direction: row;
+}
+.business-container__business{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.review-content__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
