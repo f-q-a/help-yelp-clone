@@ -7,6 +7,7 @@ import Review from './Review'
 import { Rating } from '@material-ui/lab';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import EditReview from './EditReview';
+import AddReview from "./AddReview";
 import '../styles/reviews.css'
 
 function BusinessPage() {
@@ -22,11 +23,11 @@ function BusinessPage() {
     const reviews = useSelector(state => Object.values(state.review.reviews))
     const handleEditBusiness = (e) => {
         e.preventDefault();
-        history.push({pathname: `/business/${businessId}/${sessionUser.id}/edit-business`, state: {business: {...business.businesses[to_str]}}});
+        history.push({ pathname: `/business/${businessId}/${sessionUser.id}/edit-business`, state: { business: { ...business.businesses[to_str] } } });
     }
     const showAddReview = (e) => {
         e.preventDefault();
-        history.push({pathname: `/business/${businessId}/${sessionUser.id}/add-review`, state: {business: {...business.businesses[to_str]}}});
+        history.push({ pathname: `/business/${businessId}/${sessionUser.id}/add-review`, state: { business: { ...business.businesses[to_str] } } });
     }
     const [users, setUsers] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
@@ -44,10 +45,10 @@ function BusinessPage() {
     const handleDelete = (e) => {
         e.preventDefault();
         let toDelete = window.confirm('Are you sure you would like to delete this review?')
-        if(toDelete){
+        if (toDelete) {
             dispatch(reviewActions.deleteReview(businessId, sessionUser.id, reviews[`${sessionUser.id}-${businessId}`]))
             history.push(`/business/${businessId}`)
-        }else{
+        } else {
 
         }
 
@@ -125,13 +126,16 @@ function BusinessPage() {
                     </table>
 
                     {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (
-                    <div className='business-form__container'>
-                        <form className='edit-form' onSubmit={handleSubmit}>
-                                            <div className='business-button__container'>
-                                                <button className='business-form__button' onClick={showAddReview}>Add New Review</button>
-                                            </div>
-                                        </form>
-                        </div>))}
+                        <div>
+                            <div className='business-form__container'>
+                                <form className='edit-form' onSubmit={handleSubmit}>
+                                    <div className='business-button__container'>
+                                        <button className='business-form__button' onClick={showAddReview}>Add New Review</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    ))}
 
 
 
