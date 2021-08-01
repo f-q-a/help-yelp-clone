@@ -8,15 +8,16 @@ import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
 
-function EditReview() {
-    const {businessId, userId} = useParams();
-    console.log(businessId, userId);
+function EditReview(props) {
+    const {review, setShowForm} = props;
+    const businessId = review.business_id;
+    console.log(props.review);
     const history = useHistory();
     const dispatch = useDispatch();
 
     const business = useSelector(state => state.business.businesses)
     const reviews = useSelector(state => state.review.reviews)
-    const targetReview = reviews[`${userId}-${businessId}`]
+    const targetReview = reviews[`${review.user_id}-${review.business_id}`]
 
     const [newRating, setNewRating] = useState(targetReview.rating);
     const [loading, setLoading] = useState(false);
@@ -25,7 +26,7 @@ function EditReview() {
 
     useEffect(() => {
         async function fetchData() {
-            await dispatch(businessActions.getBusiness(businessId))
+            await dispatch(businessActions.getBusiness(review.business_id))
             setLoading(true)
         }
         fetchData();
@@ -33,13 +34,14 @@ function EditReview() {
     const sessionUser = useSelector(state => state.session.user);
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(reviewActions.deleteReview(businessId, userId, targetReview))
+        dispatch(reviewActions.deleteReview(review.business_id, review.user_id, targetReview))
         history.push(`/business/${businessId}`)
 
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(reviewActions.editReview(businessId, userId, newBody, newRating))
+        await dispatch(reviewActions.editReview(review.business_id, review.user_id, newBody, newRating))
+        setShowForm(false);
         history.push(`/business/${businessId}`)
 
     }
