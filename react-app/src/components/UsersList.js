@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import './styles/userslist.css';
 function UsersList() {
   const [users, setUsers] = useState([]);
 
@@ -15,7 +15,7 @@ function UsersList() {
 
   const userComponents = users.map((user) => {
     return (
-      <li key={user.id}>
+      <li className='user-list__user' key={user.id}>
         <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
       </li>
     );
@@ -23,8 +23,8 @@ function UsersList() {
 
   return (
     <>
-      <h1>User List: </h1>
-      <ul>{userComponents}</ul>
+      <h1 className='user-list__header'>User List</h1>
+      <ul className='user-list__list'>{userComponents}</ul>
     </>
   );
 }

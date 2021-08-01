@@ -16,6 +16,10 @@ body{
   background-image: url('./components/images/scaffolding.png');
 }
 
+.main__container{
+  height: 89vh;
+}
+
 .demo__button{
   background: none;
   border: none;
@@ -27,7 +31,7 @@ body{
   font-family: "Helvetica Rounded";
   font-weight: bold;
   font-style: italic;
-  top: 26vh;
+  top: 34vh;
 }
 
 .main-splash__container{
