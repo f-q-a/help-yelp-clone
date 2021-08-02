@@ -42,6 +42,12 @@ function BusinessPage() {
         setShowForm(true);
     }
 
+    const handleAdd = (e) => {
+        e.preventDefault();
+        setBlockAdd(true);
+        setShowAddForm(true);
+    }
+
     const handleDelete = (e) => {
         e.preventDefault();
         let toDelete = window.confirm('Are you sure you would like to delete this review?')
@@ -96,6 +102,7 @@ function BusinessPage() {
                     </div>
                     <div className='business__reviews-header'>Reviews</div>
                     <table className='reviews__container'>
+                        {sessionUser && showAddForm && <tr className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm}/></tr>}
                         {Object.values(reviews).map((review, index) => {
                             if (sessionUser && sessionUser.id === review.user_id) {
                                 if (showForm) {
@@ -128,9 +135,9 @@ function BusinessPage() {
                     {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (
                         <div>
                             <div className='business-form__container'>
-                                <form className='edit-form' onSubmit={handleSubmit}>
+                                <form className='edit-form' onSubmit={handleAdd}>
                                     <div className='business-button__container'>
-                                        <button className='business-form__button' onClick={showAddReview}>Add New Review</button>
+                                        <button className='business-form__button' type='submit'>Add New Review</button>
                                     </div>
                                 </form>
                             </div>
