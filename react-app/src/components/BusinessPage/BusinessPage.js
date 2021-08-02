@@ -85,8 +85,8 @@ function BusinessPage() {
             {business.businesses[to_str] ? (
                 <div>
                     <div className='business-container__business'>
-                        <div>{business.businesses[to_str].business_name}</div>
-                        <div>{business.businesses[to_str].category.name}</div>
+                        <div className='business__header'>{business.businesses[to_str].business_name}</div>
+                        <div className='business__category'>{business.businesses[to_str].category.name}</div>
                         Average Rating: <Rating name="half-rating-read" value={business.businesses[to_str]['avg_rating']} precision={0.1} readOnly />
                         <div>
                             {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}

@@ -71,8 +71,6 @@ button:hover{
     width: 50vw;
 }
 
-
-
 @media screen and (max-width: 1212px) {
     .form__button{
         width: 13vw;

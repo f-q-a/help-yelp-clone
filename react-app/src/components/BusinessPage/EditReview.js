@@ -34,12 +34,6 @@ function EditReview(props) {
         fetchData();
     }, [businessId, business, dispatch]);
     const sessionUser = useSelector(state => state.session.user);
-    const handleDelete = (e) => {
-        e.preventDefault();
-        dispatch(reviewActions.deleteReview(review.business_id, review.user_id, targetReview))
-        history.push(`/business/${businessId}`)
-
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(reviewActions.editReview(review.business_id, review.user_id, newBody, newRating))
@@ -60,10 +54,10 @@ function EditReview(props) {
         );
     } else {
         return (
-            <div className='form__container'>
+            <div className='edit-form__container'>
                 <form onSubmit={handleSubmit}>
-                    <div className='input__container'>
-                        <div className='form__input'>
+                    <div className='edit-input__container'>
+                        <div className='edit-form__input'>
                             <label>
                                 Rating
                             </label>
@@ -75,7 +69,7 @@ function EditReview(props) {
                                 <option value={5}>5</option>
                             </select>
                         </div>
-                        <div className='form__input'>
+                        <div className='edit-form__input'>
                             <label>
                                 Update Review
                             </label>
@@ -85,10 +79,9 @@ function EditReview(props) {
                                 required
                             />
                         </div>
-                        <div className='button__container'>
-                            <button className='form__button' type="submit">Save</button>
-                            <button className='form__button' onClick={handleCancel}>Cancel</button>
-                            <button className='form__button' onClick={handleDelete}>Delete Review</button>
+                        <div className='edit-button__container'>
+                            <button className='edit-form__button' type="submit">Save</button>
+                            <button className='edit-form__button' onClick={handleCancel}>Cancel</button>
                         </div>
                     </div>
 
