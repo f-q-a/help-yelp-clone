@@ -19,21 +19,22 @@ function EditReview(props) {
     const business = useSelector(state => state.business.businesses)
     const reviews = useSelector(state => state.review.reviews)
     const targetReview = reviews[`${review.user_id}-${review.business_id}`]
+    const [validationErrors, setValidationErrors] = useState([]);
 
     const [newRating, setNewRating] = useState(props.review.rating);
     const [loading, setLoading] = useState(false);
     const [newBody, setNewBody] = useState(props.review.body)
 
     const validate = () => {
-        const validationErrors = [];
+        let temp = []
 
-        if (newBody.length >= 255) validationErrors.push('Your review exceeds the maximum character length (255). Please shorten your review.');
+        if (newBody.length >= 255) temp.push('Your review exceeds the maximum character length (255). Please shorten your review.');
 
-        return validationErrors;
+        return temp;
     }
 
-    const errors = validate();
-    
+
+
 
 
     useEffect(() => {
@@ -44,15 +45,17 @@ function EditReview(props) {
         fetchData();
     }, [businessId, business, dispatch]);
     const sessionUser = useSelector(state => state.session.user);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const temp = [];
-        if (errors.length) {
-            temp.push('Review exceeds max character length of 255. Please shorten your review.');
-            setNewBody(props.review.rating);
-        }
+
+        const errors = validate();
+
+        if (errors.length > 0) return setValidationErrors(errors);
+
         await dispatch(reviewActions.editReview(props.review.business_id, props.review.user_id, newBody, newRating))
         setShowForm(false);
+        props.setReload(!props.reload);
         history.push(`/business/${businessId}`)
 
     }
@@ -70,8 +73,8 @@ function EditReview(props) {
     } else {
         return (
             <div className='edit-form__container'>
-                <div>
-                    {errors.map((el, idx) => {
+                <div className='error__container'>
+                    {validationErrors.map((el, idx) => {
                         return (<div key={idx}>{el}</div>)
                     })}
                 </div>

@@ -13,11 +13,15 @@ function Review(props) {
   const reviews = useSelector(state => state.review.reviews);
   const sessionUser = useSelector(state => state.session.user);
   const [users, setUsers] = useState([]);
+  const dateArr = props.review.created_at.split(' ')
+  const formattedDate = dateArr.slice(1,5).join(' ')
+
   return (
 <div className='review-content__container'>
       <div className='review-content'>
         <div className='review-content__field review-content__username'><div>{props.review.user.username}</div></div>
         <div className='review-content__field review-content__rating'><Rating name="half-rating-read" value={props.review.rating} precision={0.1} readOnly /> </div>
+        <div className='review-content__field review-content__date'>{formattedDate}</div>
       </div>
       <div className='review-content'>
         <div>

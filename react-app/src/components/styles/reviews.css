@@ -128,6 +128,10 @@
     justify-content: center;
 }
 
+.review-content__date{
+    align-self: flex-end;
+}
+
 .business__header{
     font-size: 31px;
     font-weight: bold;
@@ -175,4 +179,9 @@
 
 .business-form{
     padding: 0;
+}
+
+.error__container{
+    padding: 4px;
+    color:#ef4444
 }
