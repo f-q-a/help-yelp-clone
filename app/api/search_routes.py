@@ -9,5 +9,4 @@ def search(search_term):
     search_results = db.session.execute(
         f'SELECT * from businesses as A LEFT JOIN business_services as B ON a.id = b.business_id JOIN services ON services.id = B.service_id;'
     )
-    console.log(filter)
     return

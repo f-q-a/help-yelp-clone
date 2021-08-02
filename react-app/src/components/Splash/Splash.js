@@ -23,9 +23,6 @@ function Splash() {
       tempArr = tempArr.filter(el => typeof (el) === "string");
 
       for (let i = 0; i < tempArr.length; i++) {
-        console.log(tempArr[i])
-        console.log(tempArr)
-        console.log(category)
 
         if (tempArr[i].toLowerCase().indexOf(search.toLowerCase()) !== -1 || category.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           temp.push({ ...el })
@@ -38,7 +35,6 @@ function Splash() {
       }
       if (!inserted) {
         for (let i = 0; i < el['services'].length; i++) {
-          console.log(el['services'][i])
           if (el[`services`][i]['desc'].toLowerCase().indexOf(search.toLowerCase()) !== -1 && !temp.includes(el)) {
             temp.push({ ...el })
 

@@ -13,7 +13,6 @@ import '../styles/form.css'
 function EditReview(props) {
     const { review, setShowForm } = props;
     const businessId = review.business_id;
-    console.log(props.review);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -21,9 +20,20 @@ function EditReview(props) {
     const reviews = useSelector(state => state.review.reviews)
     const targetReview = reviews[`${review.user_id}-${review.business_id}`]
 
-    const [newRating, setNewRating] = useState(targetReview.rating);
+    const [newRating, setNewRating] = useState(props.review.rating);
     const [loading, setLoading] = useState(false);
-    const [newBody, setNewBody] = useState(targetReview.body)
+    const [newBody, setNewBody] = useState(props.review.body)
+
+    const validate = () => {
+        const validationErrors = [];
+
+        if (newBody.length >= 255) validationErrors.push('Your review exceeds the maximum character length (255). Please shorten your review.');
+
+        return validationErrors;
+    }
+
+    const errors = validate();
+    
 
 
     useEffect(() => {
@@ -36,7 +46,12 @@ function EditReview(props) {
     const sessionUser = useSelector(state => state.session.user);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(reviewActions.editReview(review.business_id, review.user_id, newBody, newRating))
+        const temp = [];
+        if (errors.length) {
+            temp.push('Review exceeds max character length of 255. Please shorten your review.');
+            setNewBody(props.review.rating);
+        }
+        await dispatch(reviewActions.editReview(props.review.business_id, props.review.user_id, newBody, newRating))
         setShowForm(false);
         history.push(`/business/${businessId}`)
 
@@ -55,6 +70,11 @@ function EditReview(props) {
     } else {
         return (
             <div className='edit-form__container'>
+                <div>
+                    {errors.map((el, idx) => {
+                        return (<div key={idx}>{el}</div>)
+                    })}
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className='edit-input__container'>
                         <div className='edit-form__input'>

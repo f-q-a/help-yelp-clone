@@ -6,10 +6,8 @@ import { Link } from 'react-router-dom';
 import { Rating } from '@material-ui/lab';
 
 function SearchResults(props) {
-    const { business } = props
-    console.log(business)
+    const { business } = props;
     Object.values(business).forEach(el => {
-        console.log(el)
     })
     return (
         <div className='search__search-result'>
