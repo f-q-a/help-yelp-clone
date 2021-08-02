@@ -7,11 +7,12 @@ import '../styles/form.css'
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
-  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errors, setErrors] = useState([])
+
 
   const onSignUp = async (e) => {
     e.preventDefault();

@@ -176,3 +176,8 @@
 .business-form{
     padding: 0;
 }
+
+.error__container{
+    padding: 4px;
+    color:#ef4444
+}
