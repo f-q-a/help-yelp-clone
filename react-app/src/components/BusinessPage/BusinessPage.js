@@ -34,6 +34,7 @@ function BusinessPage() {
     const [blockAdd, setBlockAdd] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [reload, setReload] = useState(false);
     const reviewExists = sessionUser && reviews.some((el) => {
         return el.user_id === sessionUser.id;
     })
@@ -53,7 +54,7 @@ function BusinessPage() {
         let toDelete = window.confirm('Are you sure you would like to delete this review?')
         if (toDelete) {
             dispatch(reviewActions.deleteReview(businessId, sessionUser.id, reviews[`${sessionUser.id}-${businessId}`]))
-            history.push(`/business/${businessId}`)
+            setReload(!reload);
         } else {
 
         }
@@ -74,7 +75,7 @@ function BusinessPage() {
     useEffect(() => {
         dispatch(businessActions.getBusiness(businessId))
         dispatch(reviewActions.getReviews(businessId));
-    }, [businessId, dispatch]);
+    }, [businessId, reload, dispatch]);
 
 
 
@@ -100,12 +101,12 @@ function BusinessPage() {
                     </div>
                     <div className='business__reviews-header'>Reviews</div>
                     <div className='reviews__container'>
-                        {sessionUser && showAddForm && <div className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm} /></div>}
+                        {sessionUser && showAddForm && <div className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm} reload={reload} setReload={setReload} /></div>}
                         {Object.values(reviews).map((review, index) => {
                             if (sessionUser && sessionUser.id === review.user_id) {
                                 if (showForm) {
                                     return (<div className='review__container'>
-                                        <EditReview review={review} setShowForm={setShowForm} />
+                                        <EditReview review={review} setShowForm={setShowForm} reload={reload} setReload={setReload}/>
                                     </div>)
                                 } else {
                                     return (<div className='review__container'>

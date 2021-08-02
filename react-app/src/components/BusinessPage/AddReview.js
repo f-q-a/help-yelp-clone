@@ -26,7 +26,7 @@ function AddReview(props) {
         e.preventDefault();
         await dispatch(reviewActions.addReview(props.businessId, Number(props.userId), body, rating))
         props.setShowAddForm(false)
-        history.push(`/business/${props.businessId}`)
+        props.setReload(!props.reload);
 
     }
 

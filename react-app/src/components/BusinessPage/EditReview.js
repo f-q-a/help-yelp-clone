@@ -55,6 +55,7 @@ function EditReview(props) {
 
         await dispatch(reviewActions.editReview(props.review.business_id, props.review.user_id, newBody, newRating))
         setShowForm(false);
+        props.setReload(!props.reload);
         history.push(`/business/${businessId}`)
 
     }
