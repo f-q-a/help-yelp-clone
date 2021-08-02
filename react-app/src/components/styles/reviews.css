@@ -155,3 +155,24 @@
 .no-form{
     padding-bottom: 30px;
 }
+
+.edit-button__container{
+    width: 100%;
+}
+
+.edit-business-form__button{
+    display: block;
+    width: 100%;
+    border: 1px solid #ef4444;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 4px;
+    font-size: 16.5px;
+    margin: 10px 0;
+    padding: 4px;
+    font-weight: bold;
+}
+
+.business-form{
+    padding: 0;
+}

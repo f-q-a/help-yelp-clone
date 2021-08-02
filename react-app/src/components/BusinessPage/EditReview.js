@@ -30,10 +30,10 @@ function EditReview(props) {
         if (newBody.length >= 255) validationErrors.push('Your review exceeds the maximum character length (255). Please shorten your review.');
 
         return validationErrors;
-      }
+    }
 
     const errors = validate();
-
+    
 
 
     useEffect(() => {
@@ -47,7 +47,7 @@ function EditReview(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const temp = [];
-        if(errors.length){
+        if (errors.length) {
             temp.push('Review exceeds max character length of 255. Please shorten your review.');
             setNewBody(props.review.rating);
         }
@@ -70,6 +70,11 @@ function EditReview(props) {
     } else {
         return (
             <div className='edit-form__container'>
+                <div>
+                    {errors.map((el, idx) => {
+                        return (<div key={idx}>{el}</div>)
+                    })}
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className='edit-input__container'>
                         <div className='edit-form__input'>

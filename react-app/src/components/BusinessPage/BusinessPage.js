@@ -96,7 +96,7 @@ function BusinessPage() {
                                 return (<li key={el.id}>{el.desc} </li>);
                             })}
                         </ul>
-                        <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<form onSubmit={handleEditBusiness}><div className='business-button__container'><button className='business-form__button' type='submit'>Edit Business</button></div></form>))} </div>
+                        <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<form className='edit-form business-form' onSubmit={handleEditBusiness}><div className='edit-button__container'><button className='edit-business-form__button' type='submit'>Edit Business</button></div></form>))} </div>
                     </div>
                     <div className='business__reviews-header'>Reviews</div>
                     <div className='reviews__container'>
