@@ -61,8 +61,6 @@ function BusinessPage() {
 
     }
     useEffect(() => {
-        console.log('IS session user home?', sessionUser)
-        console.log('Is business home?', business[businessId])
         if (reviewExists) {
             setBlockAdd(true);
         } else {
@@ -116,7 +114,7 @@ function BusinessPage() {
                                             <form className='edit-form' onSubmit={handleSubmit}>
                                                 <div className='edit-button__container'>
                                                     <button className='edit-form__button' type='submit'>Edit</button>
-                                                    <button className='edit-form__button' onClick={handleDelete}>Delete Review</button>
+                                                    <button className='edit-form__button' onClick={handleDelete}>Delete</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -125,7 +123,7 @@ function BusinessPage() {
 
                             } else {
                                 return (
-                                    <div className='review__container'>
+                                    <div className='review__container no-form'>
                                         <Review key={index} review={review} />
                                     </div>
                                 )

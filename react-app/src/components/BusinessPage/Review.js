@@ -9,12 +9,10 @@ import { Rating } from '@material-ui/lab';
 import '../styles/reviews.css'
 
 function Review(props) {
-  console.log('HELLO IM A PROGRAMMER', props.review);
   const dispatch = useDispatch();
   const reviews = useSelector(state => state.review.reviews);
   const sessionUser = useSelector(state => state.session.user);
   const [users, setUsers] = useState([]);
-  console.log('reviews ---------->', reviews);
   return (
 <div className='review-content__container'>
       <div className='review-content'>

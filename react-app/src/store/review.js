@@ -74,7 +74,6 @@ export const editReview = (businessId, userId, review, newRating) => async (disp
 
     })
     const data = await response.json();
-    console.log(data)
     if (data.errors){
         return data
     } else {
@@ -111,14 +110,6 @@ export default function reducer(state = initialState, action) {
         case GET_REVIEWS:
             newState = {...state};
             const reviews = {}
-            console.log(action.reviews)
-
-            // action.reviews.forEach((el) => {
-            //     temp = Object.assign({}, el);
-            //     temp[temp.user_id] = Object.assign({}, temp)
-            //     reviews[action.businessId] = {...temp}
-            //     console.log(reviews)
-            // })
             temp = {}
             nextTemp = {}
             newState.reviews = {...reviews}
@@ -129,7 +120,6 @@ export default function reducer(state = initialState, action) {
             return {...state, reviews: newState.reviews};
         case EDIT_REVIEW:
             newState = {...state};
-            console.log(action.review)
             newState.reviews[`${action.review.user_id}-${action.review.business_id}`] = action.review;
             return {...state, reviews: newState.reviews}
         case DELETE_REVIEW:

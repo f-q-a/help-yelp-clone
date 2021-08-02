@@ -103,7 +103,6 @@ export const editBusiness = (business) => async (dispatch) => {
 
     })
     const data = await response.json();
-    console.log(data)
     if (data.errors){
         return data
     } else {
@@ -121,9 +120,7 @@ export default function reducer(state = initialState, action) {
             return {...state, businesses: newState.businesses}
         case GET_BUSINESS:
             newState = {...state};
-            console.log(action.business)
             newState.businesses[action.business.id] = action.business;
-            console.log(newState.businesses)
             return {...state, businesses: newState.businesses}
         case ADD_BUSINESS:
             return {...state}
