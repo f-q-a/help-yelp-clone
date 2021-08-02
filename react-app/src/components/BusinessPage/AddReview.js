@@ -8,50 +8,58 @@ import { useDispatch } from "react-redux";
 import * as businessActions from '../../store/business'
 import * as reviewActions from '../../store/review'
 import '../styles/form.css'
-function AddReview() {
+function AddReview(props) {
     const dispatch = useDispatch();
-    const { businessId, userId } = useParams();
     const history = useHistory();
     const [body, setBody] = useState("");
     const sessionUser = useSelector(state => state.session.user);
     const [rating, setRating] = useState(1);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        async function fetchData() {
+            await dispatch(businessActions.getBusiness(props.businessId))
+        }
+        fetchData();
+    }, [dispatch]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(reviewActions.addReview(businessId, Number(userId), body, rating))
-        history.push(`/business/${businessId}`)
+        await dispatch(reviewActions.addReview(props.businessId, Number(props.userId), body, rating))
+        props.setShowAddForm(false)
+        history.push(`/business/${props.businessId}`)
 
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <div>
+            <form onSubmit={handleSubmit}>
                 <div>
-                    <label>
-                        Rating
-                    </label>
-                    <select value={rating} onChange={e => setRating(e.target.value)}>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                    </select>
+                    <div>
+                        <label>
+                            Rating
+                        </label>
+                        <select value={rating} onChange={e => setRating(e.target.value)}>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>
+                            Create Review
+                        </label>
+                        <textarea
+                            defaultValue={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            required
+                        />
+                    </div>
                 </div>
-                <div>
-                <label>
-                    Create Review
-                </label>
-                <textarea
-                    defaultValue={body}
-                    onChange={(e) => setBody(e.target.value)}
-                    required
-                />
-                </div>
-            </div>
-            <button type="submit">Submit Review</button>
-        </form>
-
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
     );
 }
 

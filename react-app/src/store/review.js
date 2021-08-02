@@ -124,7 +124,9 @@ export default function reducer(state = initialState, action) {
             newState.reviews = {...reviews}
             return {...state, reviews: action.reviews}
         case ADD_REVIEW:
-            return {...state};
+            newState = {...state};
+            newState.reviews[`${action.review.user_id}-${action.review.business_id}`] = action.review;
+            return {...state, reviews: newState.reviews};
         case EDIT_REVIEW:
             newState = {...state};
             console.log(action.review)
