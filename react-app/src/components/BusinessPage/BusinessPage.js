@@ -101,36 +101,38 @@ function BusinessPage() {
                         <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) : (<form onSubmit={handleEditBusiness}><div className='business-button__container'><button className='business-form__button' type='submit'>Edit Business</button></div></form>))} </div>
                     </div>
                     <div className='business__reviews-header'>Reviews</div>
-                    <table className='reviews__container'>
-                        {sessionUser && showAddForm && <tr className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm}/></tr>}
+                    <div className='reviews__container'>
+                        {sessionUser && showAddForm && <div className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm} /></div>}
                         {Object.values(reviews).map((review, index) => {
                             if (sessionUser && sessionUser.id === review.user_id) {
                                 if (showForm) {
-                                    return (<tr className='review__container'>
+                                    return (<div className='review__container'>
                                         <EditReview review={review} setShowForm={setShowForm} />
-                                    </tr>)
+                                    </div>)
+                                } else {
+                                    return (<div className='review__container'>
+                                        <div className='review-edit'>
+                                            <Review key={index} review={review} setShowForm={setShowForm} />
+                                            <form className='edit-form' onSubmit={handleSubmit}>
+                                                <div className='edit-button__container'>
+                                                    <button className='edit-form__button' type='submit'>Edit</button>
+                                                    <button className='edit-form__button' onClick={handleDelete}>Delete Review</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>)
                                 }
-                                return (<tr className='review__container'>
-                                    <td className='review-edit'>
-                                        <Review key={index} review={review} setShowForm={setShowForm} />
-                                        <form className='edit-form' onSubmit={handleSubmit}>
-                                            <div className='edit-button__container'>
-                                                <button type='submit' className='edit-form__button' >Edit</button>
-                                                <button className='edit-form__button' onClick={handleDelete}>Delete Review</button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                </tr>)
+
                             } else {
                                 return (
-                                    <tr className='review__container'>
+                                    <div className='review__container'>
                                         <Review key={index} review={review} />
-                                    </tr>
+                                    </div>
                                 )
                             }
 
                         })}
-                    </table>
+                    </div>
 
                     {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (
                         <div>

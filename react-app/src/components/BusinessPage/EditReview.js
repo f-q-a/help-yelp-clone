@@ -47,6 +47,11 @@ function EditReview(props) {
         history.push(`/business/${businessId}`)
 
     }
+
+    const handleCancel = (e) => {
+        e.preventDefault();
+        setShowForm(false);
+    }
     if (!business) {
         return (
             <div>
@@ -82,7 +87,7 @@ function EditReview(props) {
                         </div>
                         <div className='button__container'>
                             <button className='form__button' type="submit">Save</button>
-                            <button className='form__button' onClick={setShowForm(false)}>Cancel</button>
+                            <button className='form__button' onClick={handleCancel}>Cancel</button>
                             <button className='form__button' onClick={handleDelete}>Delete Review</button>
                         </div>
                     </div>
