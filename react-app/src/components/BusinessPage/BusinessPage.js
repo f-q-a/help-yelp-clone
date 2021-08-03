@@ -54,7 +54,7 @@ function BusinessPage() {
         e.preventDefault();
         let toDelete = window.confirm('Are you sure you would like to delete this review?')
         if (toDelete) {
-            dispatch(businessActions.deleteBusiness(businessId, sessionUser.id, reviews[`${sessionUser.id}-${businessId}`]))
+            dispatch(reviewActions.deleteReview(businessId, sessionUser.id, reviews[`${sessionUser.id}-${businessId}`]))
             setReload(!reload);
         } else {
 
@@ -68,7 +68,6 @@ function BusinessPage() {
         let toDelete = window.confirm('Are you sure you would like to delete this business?')
         if (toDelete) {
             dispatch(businessActions.deleteBusiness(business.businesses[to_str]))
-            dispatch(businessActions.getBusinesses());
             history.push('/')
         } else {
 
@@ -111,7 +110,7 @@ function BusinessPage() {
                                 return (<li key={el.id}>{el.desc} </li>);
                             })}
                         </ul>
-                        <div>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) :
+                        <div className='business-form__container'>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) :
                             (<form className='edit-form business-form' onSubmit={handleEditBusiness}>
                                 <div className='edit-button__container'>
                                     <button className='edit-business-form__button' type='submit'>Edit Business</button>
