@@ -30,3 +30,10 @@
     color: #ef4444;
 
 }
+
+.user-list__container{
+    overflow-y: auto;
+    height: calc(80vh - 1.5em - 10px);
+    width: 50%;
+    margin: auto;
+}
