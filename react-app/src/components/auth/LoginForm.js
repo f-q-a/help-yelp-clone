@@ -13,6 +13,7 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const data = await dispatch(login(email, password));
     if (data.errors) {
       setErrors(data.errors);
@@ -21,6 +22,7 @@ const LoginForm = () => {
 
   const DemoLogin = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data.errors) {
       setErrors(data.errors);
@@ -45,11 +47,16 @@ const LoginForm = () => {
       <form onSubmit={onLogin} className='login__form'>
         <div className='input__container'>
           <h2>Login</h2>
+          <div>
+            {errors.map((el, idx) => {
+              return (<div key={idx}>{el}</div>)
+            })}
+          </div>
           <div className='form__input'>
             <label htmlFor="email">Email</label>
             <input
               className='login__email-input'
-              name="email" bn
+              name="email"
               type="text"
               placeholder="Email"
               value={email}
