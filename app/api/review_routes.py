@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Review
-from sqlalchemy import and_
+from sqlalchemy import and_, desc
 
 
 review_routes = Blueprint('review', __name__)
@@ -10,7 +10,7 @@ review_routes = Blueprint('review', __name__)
 
 @review_routes.route('/<int:b_id>')
 def review(b_id):
-    reviews = Review.query.filter(Review.business_id == int(b_id)).all()
+    reviews = Review.query.filter(Review.business_id == int(b_id)).order_by(Review.created_at.desc()).all()
     # TODO: I don't know man
     return {f'{review.user_id}-{review.business_id}': review.to_dict() for review in reviews}
 

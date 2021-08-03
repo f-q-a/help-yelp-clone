@@ -60,7 +60,10 @@ export const getReviews = (businessId) => async (dispatch)  => {
     if (data.errors){
         return data
     } else {
-        dispatch(getReviewsAction(data))
+        const sortedData = Object.values(data).sort((a,b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+        })
+        dispatch(getReviewsAction(sortedData))
     }
 }
 
