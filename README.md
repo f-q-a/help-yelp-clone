@@ -1,7 +1,7 @@
 # Help (Yelp Clone)
 
 ## What is Help?
-Help is an app for reviewing and finding businesses/contractors/service providers for services such as commercial cleaning, construction, plumbing, carpentry, and the like.
+Help is an app for reviewing and finding businesses/contractors/service providers for services such as commercial cleaning, construction, plumbing, carpentry, and the like. Users are able to create and view reviews for businesses, and they can also add their own businesses to the app.
 
 ## Frontend
 ### React
@@ -10,7 +10,7 @@ Help is an app for reviewing and finding businesses/contractors/service provider
 * The information presented to the user on the frontend is what is retrieved by Redux through thunks that make API calls to the backend server.
 
 ### Tailwind CSS
-* Tailwind CSS was 
+* Tailwind CSS was only used to style a few elements, at least 90% of the site was styled using regular CSS.
 
 ## Backend
 ### Flask
@@ -23,7 +23,7 @@ Help is an app for reviewing and finding businesses/contractors/service provider
 * PostgreSQL was chosen to be the database used for this project because it is very simple to use and especially to interact with through Flask-SQLAlchemy.
 
 ### Faker
-* The Faker library was used to create some of the seed data for users.
+* The Faker library was used to create some of the seed data for users, as well as the bodys for the reviews.
 
 
 ## Reflections
