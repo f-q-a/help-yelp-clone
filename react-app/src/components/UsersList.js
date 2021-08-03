@@ -24,7 +24,10 @@ function UsersList() {
   return (
     <>
       <h1 className='user-list__header'>User List</h1>
-      <ul className='user-list__list'>{userComponents}</ul>
+      <div className='user-list__container'>
+        <ul className='user-list__list'>{userComponents}</ul>
+      </div>
+
     </>
   );
 }
