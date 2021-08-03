@@ -109,6 +109,8 @@
 .review-content{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 
 }
 
@@ -184,4 +186,9 @@
 .error__container{
     padding: 4px;
     color:#ef4444
+}
+
+.username-rating{
+    display: flex;
+    flex-direction: row;
 }

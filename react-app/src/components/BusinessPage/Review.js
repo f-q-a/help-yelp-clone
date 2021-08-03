@@ -19,8 +19,10 @@ function Review(props) {
   return (
 <div className='review-content__container'>
       <div className='review-content'>
-        <div className='review-content__field review-content__username'><div>{props.review.user.username}</div></div>
-        <div className='review-content__field review-content__rating'><Rating name="half-rating-read" value={props.review.rating} precision={0.1} readOnly /> </div>
+        <div className='username-rating'>
+          <div className='review-content__field review-content__username'><div>{props.review.user.username}</div></div>
+          <div className='review-content__field review-content__rating'><Rating name="half-rating-read" value={props.review.rating} precision={0.1} readOnly /> </div>
+        </div>
         <div className='review-content__field review-content__date'>{formattedDate}</div>
       </div>
       <div className='review-content'>
