@@ -95,7 +95,7 @@ function BusinessPage() {
     return (
         <div className='business__container'>
             {business.businesses[to_str] ? (
-                <div>
+                <div className='business__sub-container'>
                     <div className='business-container__business'>
                         <div className='business__header'>{business.businesses[to_str].business_name}</div>
                         <div className='business__category'>{business.businesses[to_str].category.name}</div>
@@ -104,12 +104,12 @@ function BusinessPage() {
                             {business.businesses[to_str].address}, {business.businesses[to_str].city}, {business.businesses[to_str].state}, {business.businesses[to_str].zipcode}
                         </div>
                         <div>{business.businesses[to_str].phone_number}</div>
-                        <h3>Services Offered</h3>
+                        {/* <h3>Services Offered</h3>
                         <ul>
                             {Object.values(business.businesses[to_str].services).map((el) => {
                                 return (<li key={el.id}>{el.desc} </li>);
                             })}
-                        </ul>
+                        </ul> */}
                         <div className='business-form__container'>{sessionUser && (business.businesses[to_str].owner !== sessionUser.id ? (<div> </div>) :
                             (<form className='edit-form business-form' onSubmit={handleEditBusiness}>
                                 <div className='edit-button__container'>
@@ -125,11 +125,11 @@ function BusinessPage() {
                         {Object.values(reviews).map((review, index) => {
                             if (sessionUser && sessionUser.id === review.user_id) {
                                 if (showForm) {
-                                    return (<div className='review__container'>
+                                    return (<div className='review__container' key={index}>
                                         <EditReview review={review} setShowForm={setShowForm} reload={reload} setReload={setReload} />
                                     </div>)
                                 } else {
-                                    return (<div className='review__container'>
+                                    return (<div className='review__container' key={index}>
                                         <div className='review-edit'>
                                             <Review key={index} review={review} setShowForm={setShowForm} />
                                             <form className='edit-form' onSubmit={handleSubmit}>
@@ -156,7 +156,7 @@ function BusinessPage() {
                     {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (
                         <div>
                             <div className='business-form__container'>
-                                <form className='edit-form' onSubmit={handleAdd}>
+                                <form className='business-edit-form' onSubmit={handleAdd}>
                                     <div className='business-button__container'>
                                         <button className='business-form__button' type='submit'>Add New Review</button>
                                     </div>
