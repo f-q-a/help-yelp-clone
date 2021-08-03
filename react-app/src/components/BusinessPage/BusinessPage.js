@@ -17,7 +17,7 @@ function BusinessPage() {
     const business = useSelector(state => {
         return state.business
     })
-
+    const businesses = useSelector(state => state.business.businesses)
     const to_str = String(businessId)
 
 
@@ -88,7 +88,7 @@ function BusinessPage() {
     useEffect(() => {
         dispatch(businessActions.getBusiness(businessId))
         dispatch(reviewActions.getReviews(businessId));
-    }, [businessId, reload, business, dispatch]);
+    }, [businessId, reload, businesses, dispatch]);
 
 
 
