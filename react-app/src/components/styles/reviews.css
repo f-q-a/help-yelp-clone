@@ -1,6 +1,6 @@
 .business__container{
     width: 100%;
-    height: 60vh;
+    height: 89vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +17,7 @@
 
 .business-form__button{
     display: block;
-    width: 50%;
+    width: 10%;
     border: 1px solid #ef4444;
     background-color: #ef4444;
     color: white;
@@ -164,18 +164,20 @@
 
 .edit-button__container{
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .edit-business-form__button{
     display: block;
-    width: 100%;
+    width: 10%;
     border: 1px solid #ef4444;
     background-color: #ef4444;
     color: white;
     border-radius: 4px;
-    font-size: 16.5px;
-    margin: 10px 0;
-    padding: 4px;
+    font-size: 14px;
+    margin: 10px 10px;
+    padding: 3px;
     font-weight: bold;
 }
 
@@ -194,5 +196,22 @@
 }
 
 .business-form__container{
+    width: 100%;
+}
+.business__sub-container{
+    width: 100%;
+}
+.edit-form.business-form{
+    width: 100%;
+}
+
+.reviews__container{
+    overflow-y: auto;
+    height: calc(50vh - 1.5em - 10px);
+    width: 50%;
+    margin: auto;
+}
+
+.business-edit-form{
     width: 100%;
 }

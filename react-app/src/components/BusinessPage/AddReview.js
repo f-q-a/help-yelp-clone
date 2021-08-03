@@ -33,8 +33,8 @@ function AddReview(props) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <div>
+                <div className='review-input__container'>
+                    <div className='form__input'>
                         <label>
                             Rating
                         </label>
@@ -46,7 +46,7 @@ function AddReview(props) {
                             <option value={5}>5</option>
                         </select>
                     </div>
-                    <div>
+                    <div className='form__input'>
                         <label>
                             Create Review
                         </label>
@@ -57,7 +57,9 @@ function AddReview(props) {
                         />
                     </div>
                 </div>
-                <button type="submit">Submit Review</button>
+                <div className='edit-button__container'>
+                    <button className='edit-form__button' type="submit">Submit Review</button>
+                </div>
             </form>
         </div>
     );

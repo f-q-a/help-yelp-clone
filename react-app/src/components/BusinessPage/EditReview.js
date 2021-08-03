@@ -72,15 +72,15 @@ function EditReview(props) {
         );
     } else {
         return (
-            <div className='edit-form__container'>
+            <div className='edit-review__container'>
                 <div className='error__container'>
                     {validationErrors.map((el, idx) => {
                         return (<div key={idx}>{el}</div>)
                     })}
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <div className='edit-input__container'>
-                        <div className='edit-form__input'>
+                    <div className='review-input__container'>
+                        <div className='form__input'>
                             <label>
                                 Rating
                             </label>
@@ -92,7 +92,7 @@ function EditReview(props) {
                                 <option value={5}>5</option>
                             </select>
                         </div>
-                        <div className='edit-form__input'>
+                        <div className='form__input'>
                             <label>
                                 Update Review
                             </label>
