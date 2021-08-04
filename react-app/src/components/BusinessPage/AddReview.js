@@ -37,6 +37,7 @@ function AddReview(props) {
         if(errors.length > 0) return setValidationErrors(errors)
         await dispatch(reviewActions.addReview(props.businessId, Number(props.userId), body, rating))
         props.setShowAddForm(false)
+        props.setBlockAdd(true);
         props.setReload(!props.reload);
 
     }

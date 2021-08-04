@@ -36,6 +36,7 @@ function BusinessPage() {
     const [showForm, setShowForm] = useState(false);
     const [showAddForm, setShowAddForm] = useState(false);
     const [reload, setReload] = useState(false);
+    let hideButtonVar = false;
 
     const reviewExists = sessionUser && reviews.some((el) => {
         return el.user_id === sessionUser.id;
@@ -45,10 +46,16 @@ function BusinessPage() {
         setShowForm(true);
     }
 
+    const hideButton = () =>{
+         setBlockAdd(true);
+    }
+
     const handleAdd = (e) => {
         e.preventDefault();
-        setBlockAdd(true);
+        hideButtonVar = true;
+        setBlockAdd(true)
         setShowAddForm(true);
+
     }
 
     const handleDelete = (e) => {
@@ -75,6 +82,17 @@ function BusinessPage() {
         }
 
     }
+    useEffect(() => {
+        if (reviewExists) {
+            setBlockAdd(true);
+        } else {
+            setBlockAdd(false);
+        }
+        return () => {
+            dispatch(reviewActions.getReviews(businessId));
+        }
+    }, [sessionUser, business, reviewExists, businessId])
+
     useEffect(() => {
         if (reviewExists) {
             setBlockAdd(true);
@@ -122,7 +140,7 @@ function BusinessPage() {
                     </div>
                     <div className='business__reviews-header'>Reviews</div>
                     <div className='reviews__container'>
-                        {sessionUser && showAddForm && <div className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm} reload={reload} setReload={setReload} /></div>}
+                        {sessionUser && showAddForm && <div className='review__container'><AddReview businessId={business.businesses[to_str].id} userId={sessionUser.id} setShowAddForm={setShowAddForm} reload={reload} setReload={setReload} setBlockAdd={setBlockAdd} /></div>}
                         {Object.values(reviews).map((review, index) => {
                             if (sessionUser && sessionUser.id === review.user_id) {
                                 if (showForm) {
@@ -154,17 +172,18 @@ function BusinessPage() {
                         })}
                     </div>
 
-                    {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (blockAdd === true ? (<div> </div>) : (
-                        <div>
-                            <div className='business-form__container'>
-                                <form className='business-edit-form' onSubmit={handleAdd}>
-                                    <div className='business-button__container'>
-                                        <button className='business-form__button' type='submit'>Add New Review</button>
-                                    </div>
-                                </form>
-                            </div>
+                    {sessionUser && (business.businesses[to_str].owner !== sessionUser.id) && (showAddForm === true || blockAdd === true? (
+                        <div className='business-form__container'>
+
                         </div>
-                    ))}
+
+                    ):(<div><div className='business-form__container'>
+                    <form className='business-edit-form'>
+                        <div className='business-button__container'>
+                             <button className='business-form__button' onClick={handleAdd}>Add New Review</button>
+                        </div>
+                    </form>
+                </div></div>))}
 
 
 
