@@ -1,5 +1,5 @@
 .form__container{
-    height: 100vh;
+    height: 89vh;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -88,6 +88,8 @@ button:hover{
     align-items: center;
 }
 
+
+
 @media screen and (max-width: 1212px) {
     .form__button{
         width: 13vw;
@@ -113,4 +115,5 @@ button:hover{
         align-items: center;
 
     }
+
   }

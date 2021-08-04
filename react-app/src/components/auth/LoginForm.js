@@ -42,7 +42,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='form__container'>
+    <div className='form__container business-edit-form'>
 
       <form onSubmit={onLogin} className='login__form'>
         <div className='input__container'>
