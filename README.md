@@ -12,6 +12,9 @@
 ### Tailwind CSS
 * Tailwind CSS was only used to style a few elements, at least 90% of the site was styled using regular CSS.
 
+### Material-UI
+* The star ratings and the search icon come from the Material-UI/icons package. 
+
 ## Backend
 ### Flask
 * Flask made implementing the backend routes very straightforward, another reason it was chosen was so that Flask-SQLAlchemy could be used as the ORM for the app.
