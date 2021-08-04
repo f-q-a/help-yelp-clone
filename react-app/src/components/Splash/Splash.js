@@ -76,7 +76,7 @@ function Splash() {
       <div className='main-splash__container'>
         <div className='main-splash__header'>help</div>
         <div className='main-splash__main'>
-          <h4 className='main-splash__help-text'>Search for businesses by name, category, or services rendered</h4>
+          <h4 className='main-splash__help-text'>Search for businesses by name, category, address, or phone number</h4>
           <div className='search-container'>
             <form className='main-splash__content' onSubmit={handleSubmit}>
               <input
