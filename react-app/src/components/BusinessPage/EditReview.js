@@ -29,7 +29,7 @@ function EditReview(props) {
         let temp = []
 
         if (newBody.length >= 255) temp.push('Your review exceeds the maximum character length (255). Please shorten your review.');
-
+        if(newBody.trim().length <=0 ) temp.push('Review cannot be empty!');
         return temp;
     }
 

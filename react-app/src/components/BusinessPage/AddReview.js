@@ -12,8 +12,17 @@ function AddReview(props) {
     const dispatch = useDispatch();
     const history = useHistory();
     const [body, setBody] = useState("");
+    const [validationErrors, setValidationErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
     const [rating, setRating] = useState(1);
+
+    const validate = () => {
+        let temp = []
+
+        if (body.length >= 255) temp.push('Your review exceeds the maximum character length (255). Please shorten your review.');
+        if(body.trim().length <=0 ) temp.push('Review cannot be empty!');
+        return temp;
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -24,6 +33,8 @@ function AddReview(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const errors = validate();
+        if(errors.length > 0) return setValidationErrors(errors)
         await dispatch(reviewActions.addReview(props.businessId, Number(props.userId), body, rating))
         props.setShowAddForm(false)
         props.setReload(!props.reload);
@@ -31,7 +42,12 @@ function AddReview(props) {
     }
 
     return (
-        <div>
+        <div className='add-review__container'>
+            <div className='error__container'>
+                    {validationErrors.map((el, idx) => {
+                        return (<div className='error' key={idx}>{el}</div>)
+                    })}
+                </div>
             <form onSubmit={handleSubmit}>
                 <div className='review-input__container'>
                     <div className='form__input'>

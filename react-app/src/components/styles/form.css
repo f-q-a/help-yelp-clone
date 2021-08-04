@@ -15,6 +15,15 @@ form{
     justify-content: center;
 }
 
+.error{
+    padding-bottom: 2px;
+    color: #ef4444;
+}
+
+.add-review__container{
+    display: flex;
+    flex-direction: column;
+}
 
 h2{
     display: flex;
@@ -88,6 +97,14 @@ button:hover{
     align-items: center;
 }
 
+.business-edit__form{
+    display: flex;
+    flex-direction: column;
+}
+
+.add-review__container{
+
+}
 
 
 @media screen and (max-width: 1212px) {
