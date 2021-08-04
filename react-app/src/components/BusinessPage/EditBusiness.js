@@ -23,7 +23,21 @@ function EditBusiness() {
     const [businessName, setBusinessName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [services, setServices] = useState('');
+    const [validationErrors, setValidationErrors] = useState([]);
 
+    const validate = () =>{
+        let temp = [];
+        if(phoneNumber.length !== 10){
+            temp.push('Phone numbers must contain exactly 10 digits. Please enter a valid phone number.')
+        }
+
+        if(zipcode.length !== 5){
+            temp.push('Zipcodes must contain exactly 5 digits. Please enter a valid Zipcode.')
+        }
+
+        return temp;
+
+    }
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -33,6 +47,8 @@ function EditBusiness() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const errors = validate();
+        if (errors.length > 0) return setValidationErrors(errors);
         const businessUpdate = { 'id': businessId, 'business_name': businessName, 'address': address, 'city': city, 'state': businessState, 'zipcode': zipcode, 'category_id': categoryId, 'phone_number': phoneNumber, 'business_img': '', 'services': services }
         await dispatch(businessActions.editBusiness(businessUpdate))
         history.push(`/business/${businessId}`)
@@ -64,6 +80,11 @@ function EditBusiness() {
     } else {
         return (
             <div className='form__container'>
+                <div className='business-error__container'>
+                    {validationErrors.map((el, idx) => {
+                        return (<div key={idx}>{el}</div>)
+                    })}
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className='input__container'>
                         <h2>Edit Business Details</h2>
@@ -134,7 +155,7 @@ function EditBusiness() {
                         </div>
                         <div className='form__input'>
                             <label>
-                                Edit Phone Number
+                                Edit Phone Number (e.g. 1234567899)
                             </label>
                             <input
                                 name="phone_number"
