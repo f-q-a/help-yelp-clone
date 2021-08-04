@@ -36,6 +36,7 @@ function BusinessPage() {
     const [showForm, setShowForm] = useState(false);
     const [showAddForm, setShowAddForm] = useState(false);
     const [reload, setReload] = useState(false);
+
     const reviewExists = sessionUser && reviews.some((el) => {
         return el.user_id === sessionUser.id;
     })

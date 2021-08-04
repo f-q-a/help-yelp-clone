@@ -22,15 +22,50 @@ function AddBusiness() {
     const [city, setCity] = useState('');
     const [businessName, setBusinessName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [services, setServices] = useState('');
+    const [validationErrors, setValidationErrors] = useState([]);
+
+    const validate = () =>{
+        let temp = [];
+        if(phoneNumber.length !== 10){
+            temp.push('Phone numbers must contain exactly 10 digits. Please enter a valid phone number.')
+        }
+
+        if(!(address.trim().length > 0)){
+            temp.push('Business address cannot be empty! Please enter an address for your business.')
+        }
+
+        if(!(businessState.trim().length > 0)){
+            temp.push('Business state cannot be empty! Please enter the state your business is located in.')
+        }
+
+        if(!(city.trim().length > 0)){
+            temp.push('City cannot be empty! Please enter the city your business is located in.')
+        }
+
+        if(!(businessName.trim().length > 0)){
+            temp.push('Business name cannot be empty! Please enter a name for your business.')
+        }
+
+        if(zipcode.length !== 5){
+            temp.push('Zipcodes must contain exactly 5 digits. Please enter a valid zipcode.')
+        }
+
+        return temp;
+
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const errors = validate();
+        if(errors.length > 0) return setValidationErrors(errors);
         const businessUpdate = { 'business_name': businessName, 'address': address, 'city': city, 'state': businessState, 'zipcode': zipcode, 'owner': sessionUser.id, 'category_id': categoryId, 'phone_number': phoneNumber, 'business_img': '' }
         await dispatch(businessActions.addBusiness(businessUpdate))
         history.push(`/`)
 
     }
+
+
 
     useEffect(() => {
         async function fetchData() {
@@ -41,7 +76,12 @@ function AddBusiness() {
 
     return (
 
-            <div className='form__container'>
+            <div className='form__container business-edit__form'>
+                <div className='business-error__container'>
+                    {validationErrors.map((el, idx) => {
+                        return (<div className='error' key={idx}>{el}</div>)
+                    })}
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className='input__container'>
                         <h2>New Business</h2>

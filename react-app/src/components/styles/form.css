@@ -102,10 +102,10 @@ button:hover{
     flex-direction: column;
 }
 
-.add-review__container{
-
+.business-error__container{
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
-
 
 @media screen and (max-width: 1212px) {
     .form__button{
