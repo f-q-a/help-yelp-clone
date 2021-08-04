@@ -1,4 +1,6 @@
 # Help (Yelp Clone)
+![Help Yelp Clone](https://user-images.githubusercontent.com/30086536/128221694-8bd0d688-9359-42f8-a744-4ab369814faa.png)
+
 
 ## What is Help?
 [Help](https://help-yelp.herokuapp.com/) is an app for reviewing and finding businesses/contractors/service providers for services such as commercial cleaning, construction, plumbing, carpentry, and the like. Users are able to create and view reviews for businesses, and they can also add their own businesses to the app.
