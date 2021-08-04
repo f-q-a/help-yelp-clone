@@ -1,7 +1,7 @@
 # Help (Yelp Clone)
 
 ## What is Help?
-Help is an app for reviewing and finding businesses/contractors/service providers for services such as commercial cleaning, construction, plumbing, carpentry, and the like. Users are able to create and view reviews for businesses, and they can also add their own businesses to the app.
+[Help](https://help-yelp.herokuapp.com/) is an app for reviewing and finding businesses/contractors/service providers for services such as commercial cleaning, construction, plumbing, carpentry, and the like. Users are able to create and view reviews for businesses, and they can also add their own businesses to the app.
 
 ## Frontend
 ### React
